@@ -2,6 +2,8 @@
 
 A responsive freelance software-engineering portfolio built around verified project work. The site presents Joshua's product, full-stack, mobile, cloud, and automation experience without overstating the maturity of unpublished concepts.
 
+The visual direction is intentionally business-focused: restrained navy and cobalt, clear service positioning, evidence-led case studies, and generous spacing suitable for prospective clients or hiring teams.
+
 ## Run locally
 
 Requires Node.js 22.13 or newer.

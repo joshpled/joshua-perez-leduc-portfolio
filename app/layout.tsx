@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Joshua Perez Leduc — Software Engineer",
-  description: "Independent software engineer building thoughtful web, mobile, cloud, and automation products.",
+  title: "Freelance Software Engineer | Joshua Perez Leduc",
+  description: "Independent software engineer building dependable web, mobile, cloud, and custom software products.",
   icons: {
     icon: "/favicon.svg",
     shortcut: "/favicon.svg",

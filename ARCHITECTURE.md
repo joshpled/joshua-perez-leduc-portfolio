@@ -8,7 +8,7 @@ The page is intentionally server-renderable. Project content lives beside its ma
 
 ## Visual system
 
-The visual thesis is a small independent engineering practice: technical, precise, and energetic. Near-black green, acid chartreuse, and restrained cyan/orange/violet accents separate the practice from generic portfolio templates. Large editorial type provides the primary visual identity, while project screenshots are reserved for work that has verified assets.
+The visual thesis is a focused independent engineering consultancy: calm, credible, and precise. Deep navy establishes trust, white and cool gray keep dense case-study content readable, and a restrained cobalt accent identifies primary actions and technical details. Generous spacing and a consistent card system prioritize the work over decoration. Project imagery remains limited to verified, project-owned assets.
 
 ## Content model
 

@@ -2,63 +2,77 @@ import {
   ArrowDownRight,
   ArrowRight,
   Braces,
+  Check,
   Cloud,
   CodeXml,
+  Database,
   Gauge,
   Layers3,
+  LockKeyhole,
   Smartphone,
   Sparkles,
+  Workflow,
 } from "lucide-react";
 
-const capabilities = [
+const services = [
   {
     icon: Layers3,
-    title: "Product engineering",
-    text: "From a loose concept to a working product: flows, interface, architecture, implementation, and the decisions between them.",
+    title: "Product development",
+    text: "Turn a concept into a focused, usable product—from scope and user flows through implementation and launch.",
+    details: ["Product definition", "UX and interface systems", "Full-stack implementation"],
   },
   {
     icon: Cloud,
-    title: "Full-stack systems",
-    text: "Responsive frontends connected to durable data, third-party services, authentication, secure sessions, and cloud infrastructure.",
+    title: "Platforms & integrations",
+    text: "Connect interfaces to durable data, cloud infrastructure, third-party services, and secure user workflows.",
+    details: ["Cloud architecture", "API integrations", "Authentication and data"],
   },
   {
     icon: Sparkles,
-    title: "Purpose-built tools",
-    text: "Automations, internal utilities, research interfaces, and unusual technical work shaped around a specific real-world problem.",
+    title: "Custom engineering",
+    text: "Build the specialized automation, internal tool, or technical solution that an off-the-shelf product cannot provide.",
+    details: ["Workflow automation", "Internal tools", "Technical prototypes"],
   },
 ];
 
-const compactProjects = [
+const additionalProjects = [
   {
     number: "03",
+    icon: Smartphone,
     name: "DJ Request List",
-    kind: "Installable event app",
+    type: "Installable event application",
     description:
-      "A guest request experience paired with a PIN-protected live DJ queue, rate-limited access, offline support, and cloud persistence.",
-    stack: ["React", "Cloudflare D1", "PWA", "Security"],
-    accent: "cyan",
-    mark: "DR",
+      "A guest-facing music request experience paired with a protected, automatically refreshed DJ operations dashboard.",
+    proof: ["Rate-limited PIN access", "Offline-capable PWA", "Cloudflare D1 persistence"],
+    stack: "React · TypeScript · Cloudflare",
   },
   {
     number: "04",
+    icon: Gauge,
     name: "Velocity Overdrive",
-    kind: "Game systems · C# / .NET",
+    type: "Game systems engineering",
     description:
-      "A configurable Dead Cells gameplay mod that adjusts player combat and movement while deliberately preserving enemy behavior and safety checks.",
-    stack: ["C#", ".NET 10", "Runtime hooks", "Configuration"],
-    accent: "orange",
-    mark: "3×",
+      "A configurable Dead Cells gameplay mod that changes player combat and movement while preserving engine safety constraints.",
+    proof: ["Runtime behavior hooks", "Validated configuration", "Player-scoped changes"],
+    stack: "C# · .NET 10 · Modding SDK",
   },
   {
     number: "05",
+    icon: Workflow,
     name: "Solo Developer’s Stack Guide",
-    kind: "Interactive research product",
+    type: "Interactive decision product",
     description:
-      "A ten-chapter decision tool combining technical research, platform comparisons, transparent cost models, and an interactive release roadmap.",
-    stack: ["TypeScript", "Data modeling", "Cost engine", "Research"],
-    accent: "violet",
-    mark: "10",
+      "A research-led planning tool that makes software stack, operating-cost, and release-lifecycle tradeoffs understandable.",
+    proof: ["Transparent cost engine", "Five-platform comparison", "Scenario validation"],
+    stack: "TypeScript · Data modeling · Research",
   },
+];
+
+const process = [
+  ["01", "Frame", "Clarify the outcome, audience, constraints, and riskiest assumptions before implementation starts."],
+  ["02", "Shape", "Translate the problem into a focused product flow and a technical plan you can understand."],
+  ["03", "Build", "Deliver working software in reviewable slices, with decisions and tradeoffs made visible."],
+  ["04", "Verify", "Test the important paths, document the system, and hand over a product you can maintain."],
 ];
 
 export default function Home() {
@@ -68,242 +82,256 @@ export default function Home() {
         <a className="wordmark" href="#top" aria-label="Joshua Perez Leduc, home">
           <span>JPL</span>
           <span className="wordmark-copy">
-            Software engineer
-            <br />
-            Independent practice
+            Joshua Perez Leduc
+            <small>Independent software engineer</small>
           </span>
         </a>
         <nav aria-label="Primary navigation">
-          <a href="#work">Selected work</a>
+          <a href="#work">Work</a>
           <a href="#services">Services</a>
-          <a href="#contact">Start a project</a>
+          <a href="#about">About</a>
+          <a className="nav-cta" href="#contact">
+            Start a conversation <ArrowRight aria-hidden="true" />
+          </a>
         </nav>
       </header>
 
       <section className="hero" id="top">
-        <p className="eyebrow">
-          <span /> Available for select freelance projects
-        </p>
-        <h1>
-          I build software that makes ambitious ideas <em>work.</em>
-        </h1>
-        <div className="hero-lower">
-          <p className="hero-copy">
-            I&apos;m Joshua Perez Leduc, an independent software engineer turning early ideas
-            into thoughtful, dependable products—from event platforms to native apps and
-            specialized tools.
-          </p>
-          <a className="round-link" href="#work" aria-label="See selected work">
-            <ArrowDownRight aria-hidden="true" />
-          </a>
+        <div className="hero-main">
+          <div className="hero-content">
+            <p className="eyebrow">
+              <span /> Available for select freelance projects
+            </p>
+            <h1>
+              Software, designed with purpose. <em>Engineered to last.</em>
+            </h1>
+            <p className="hero-copy">
+              I help founders and teams turn early ideas and complex requirements into
+              clear, dependable digital products—from first decision to working software.
+            </p>
+            <div className="hero-actions">
+              <a className="primary-link" href="#work">
+                View selected work <ArrowRight aria-hidden="true" />
+              </a>
+              <a className="text-link" href="#services">
+                Explore services <ArrowDownRight aria-hidden="true" />
+              </a>
+            </div>
+          </div>
+
+          <aside className="hero-profile">
+            <p>Independent engineering practice</p>
+            <div className="profile-monogram" aria-hidden="true">JPL</div>
+            <dl>
+              <div>
+                <dt>Focus</dt>
+                <dd>Product and platform engineering</dd>
+              </div>
+              <div>
+                <dt>Capabilities</dt>
+                <dd>Web, mobile, cloud, and automation</dd>
+              </div>
+              <div>
+                <dt>Engagement</dt>
+                <dd>Focused builds and technical partnerships</dd>
+              </div>
+            </dl>
+          </aside>
         </div>
-        <div className="capability-rail" aria-label="Core capabilities">
-          <span>01 / Product engineering</span>
-          <span>02 / Web &amp; mobile</span>
-          <span>03 / Cloud systems</span>
-          <span>04 / Automation</span>
+
+        <div className="credibility-rail" aria-label="Portfolio highlights">
+          <span><strong>05</strong> verified case studies</span>
+          <span><strong>Full-cycle</strong> product delivery</span>
+          <span><strong>Multi-platform</strong> engineering experience</span>
         </div>
       </section>
 
       <section className="work-section" id="work">
-        <div className="section-heading">
-          <p className="eyebrow">Selected work / 2026</p>
+        <div className="section-header">
           <div>
-            <h2>Built for real moments.</h2>
-            <p className="section-intro">
-              Each project started with a specific need. The work spans product strategy,
-              interaction design, engineering, deployment, and the less glamorous edge cases
-              that make software trustworthy.
-            </p>
+            <p className="section-label">Selected work</p>
+            <h2>Products shaped around real needs.</h2>
           </div>
+          <p>
+            A selection of product, platform, and applied-engineering work. Each case study
+            is grounded in verified functionality rather than invented business metrics.
+          </p>
         </div>
 
-        <article className="showcase showcase-boothline">
-          <div className="showcase-copy">
-            <p className="project-number">01 / Featured product</p>
-            <div>
-              <p className="project-kind">Event platform · Full-stack web</p>
-              <h3>Boothline</h3>
-              <p className="project-description">
-                A reusable song-request platform for any kind of gathering. Hosts can create
-                branded events, share guest links and QR codes, manage a live queue, and reuse
-                their setup for the next crowd.
-              </p>
-              <ul className="outcome-list" aria-label="Boothline engineering highlights">
-                <li>Fuzzy search across a 10,000-song catalog</li>
-                <li>Cross-tab synchronization and durable local demo state</li>
-                <li>Timezone-aware event controls and guarded request rules</li>
-              </ul>
-              <div className="tag-row">
-                <span>React</span>
-                <span>TypeScript</span>
-                <span>Product design</span>
-                <span>Responsive UX</span>
-              </div>
-              <p className="project-status">Interactive product concept · Production path documented</p>
+        <article className="case-study featured-case">
+          <div className="case-copy">
+            <div className="case-meta"><span>01</span><span>Featured product</span></div>
+            <p className="case-type">Event platform · Product engineering</p>
+            <h3>Boothline</h3>
+            <p className="case-summary">
+              A reusable song-request platform that gives hosts a polished event workspace
+              and guests a quick, mobile-first way to discover and request music.
+            </p>
+            <div className="case-scope">
+              <div><span>Challenge</span><p>Make live song requests easy for guests and manageable for hosts across different event types.</p></div>
+              <div><span>Solution</span><p>One product system for event creation, branded guest pages, QR sharing, search, and live queue operations.</p></div>
             </div>
+            <ul className="proof-list">
+              <li><Check />Fuzzy matching across a 10,000-song catalog</li>
+              <li><Check />Cross-tab synchronization with guarded request rules</li>
+              <li><Check />Timezone-aware scheduling and reusable event themes</li>
+            </ul>
+            <p className="case-stack">React · TypeScript · Product design · Responsive web</p>
+            <p className="case-status">Interactive product concept · Production path documented</p>
           </div>
-          <div className="showcase-visual boothline-visual">
-            {/* Project-owned image with fixed container dimensions. */}
+          <div className="case-visual boothline-visual">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/projects/boothline-dashboard.png"
-              alt="Boothline event dashboard showing live events and request activity"
-            />
+            <img src="/projects/boothline-dashboard.png" alt="Boothline event dashboard showing event and request activity" />
+            <span>Host workspace</span>
           </div>
         </article>
 
-        <article className="showcase showcase-camera">
-          <div className="showcase-visual camera-visual">
-            {/* Project-owned image; width and height preserve its square aspect ratio. */}
+        <article className="case-study camera-case">
+          <div className="case-visual camera-visual">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/projects/event-camera-icon.png"
-              alt="Our Wedding Camera app icon with gold film reels and JG monogram"
-              width={1024}
-              height={1024}
-            />
-            <div className="camera-caption">
+            <img src="/projects/event-camera-icon.png" alt="Our Wedding Camera application icon" width={1024} height={1024} />
+            <div className="visual-note">
               <Smartphone aria-hidden="true" />
               <span>Designed around the phone already in every guest&apos;s hand</span>
             </div>
           </div>
-          <div className="showcase-copy camera-copy">
-            <p className="project-number">02 / Live event utility</p>
-            <div>
-              <p className="project-kind">Mobile web · Cloud integration</p>
-              <h3>Event Camera Platform</h3>
-              <p className="project-description">
-                A private, disposable-camera-style experience for wedding guests. It limits
-                captures, previews photos, uploads directly to Google Drive, and gives the
-                event owner a protected control panel.
-              </p>
-              <ul className="outcome-list" aria-label="Event Camera engineering highlights">
-                <li>Google OAuth and Drive upload integration</li>
-                <li>Secure sessions, password rotation, and D1 persistence</li>
-                <li>Installable mobile experience with offline fallback</li>
-              </ul>
-              <div className="tag-row">
-                <span>React</span>
-                <span>OAuth</span>
-                <span>Cloudflare</span>
-                <span>Google Drive</span>
-              </div>
+          <div className="case-copy">
+            <div className="case-meta"><span>02</span><span>Event utility</span></div>
+            <p className="case-type">Mobile web · Cloud integration</p>
+            <h3>Event Camera Platform</h3>
+            <p className="case-summary">
+              A private, disposable-camera-style experience for wedding guests, backed by
+              secure event controls and direct cloud storage.
+            </p>
+            <div className="case-scope">
+              <div><span>Challenge</span><p>Collect candid guest photos without requiring an app-store download or a complicated upload flow.</p></div>
+              <div><span>Solution</span><p>A mobile-first capture experience with photo limits, previews, private administration, and Google Drive delivery.</p></div>
             </div>
+            <ul className="proof-list">
+              <li><Check />Google OAuth and Drive upload integration</li>
+              <li><Check />Secure sessions, password rotation, and D1 persistence</li>
+              <li><Check />Installable experience with offline fallback</li>
+            </ul>
+            <p className="case-stack">React · OAuth · Cloudflare · Google Drive</p>
           </div>
         </article>
 
         <div className="project-grid">
-          {compactProjects.map((project) => (
-            <article className={`project-card ${project.accent}`} key={project.name}>
-              <div className="project-card-top">
-                <span>{project.number}</span>
-                <span className="project-mark" aria-hidden="true">{project.mark}</span>
+          {additionalProjects.map(({ number, icon: Icon, name, type, description, proof, stack }) => (
+            <article className="project-card" key={name}>
+              <div className="project-top">
+                <span>{number}</span>
+                <Icon aria-hidden="true" />
               </div>
-              <p className="project-kind">{project.kind}</p>
-              <h3>{project.name}</h3>
-              <p>{project.description}</p>
-              <div className="tag-row">
-                {project.stack.map((item) => <span key={item}>{item}</span>)}
-              </div>
+              <p className="case-type">{type}</p>
+              <h3>{name}</h3>
+              <p className="project-description">{description}</p>
+              <ul>
+                {proof.map((item) => <li key={item}>{item}</li>)}
+              </ul>
+              <p className="case-stack">{stack}</p>
             </article>
           ))}
         </div>
       </section>
 
       <section className="services-section" id="services">
-        <div className="section-kicker">
-          <p className="eyebrow">How I can help</p>
-          <p className="services-lead">
-            One engineer across the whole problem—clear enough to discuss the product,
-            technical enough to build it properly.
+        <div className="section-header">
+          <div>
+            <p className="section-label">Services</p>
+            <h2>One partner across the whole problem.</h2>
+          </div>
+          <p>
+            Clear enough to discuss the business need, technical enough to build the system,
+            and disciplined enough to leave it understandable.
           </p>
         </div>
-        <div className="capability-grid">
-          {capabilities.map(({ icon: Icon, title, text }, index) => (
+        <div className="service-grid">
+          {services.map(({ icon: Icon, title, text, details }, index) => (
             <article key={title}>
-              <div className="capability-top">
-                <span>0{index + 1}</span>
-                <Icon aria-hidden="true" />
-              </div>
+              <div className="service-icon"><Icon aria-hidden="true" /></div>
+              <span className="service-number">0{index + 1}</span>
               <h3>{title}</h3>
               <p>{text}</p>
+              <ul>{details.map((detail) => <li key={detail}><Check />{detail}</li>)}</ul>
             </article>
           ))}
         </div>
-
-        <div className="process-block">
-          <div className="process-title">
-            <p className="eyebrow">Working together</p>
-            <h2>Clear thinking.<br />Visible progress.</h2>
-          </div>
-          <ol className="process-list">
-            <li>
-              <span>01</span>
-              <div><h3>Define the real problem</h3><p>We turn the initial idea into a focused outcome, with the risks and unknowns made visible.</p></div>
-            </li>
-            <li>
-              <span>02</span>
-              <div><h3>Build a useful first slice</h3><p>You see the product early, while feedback is still cheap and the direction is easy to change.</p></div>
-            </li>
-            <li>
-              <span>03</span>
-              <div><h3>Engineer the full experience</h3><p>I connect interface, data, integrations, and edge cases into one coherent system.</p></div>
-            </li>
-            <li>
-              <span>04</span>
-              <div><h3>Verify and hand it over</h3><p>The result is tested, documented, and explained so you understand what you own.</p></div>
-            </li>
-          </ol>
-        </div>
       </section>
 
-      <section className="about-section">
-        <div className="about-statement">
-          <p className="eyebrow">The practice</p>
-          <h2>Software should feel considered—not assembled.</h2>
+      <section className="process-section">
+        <div className="process-intro">
+          <p className="section-label light">How I work</p>
+          <h2>Clarity at every stage.</h2>
+          <p>
+            You should always understand what is being built, why a decision was made, and
+            what comes next. The process is structured to keep progress visible.
+          </p>
         </div>
-        <div className="about-detail">
-          <p>
-            My work sits where product judgment and engineering meet. I care about what a
-            person is trying to accomplish, how the system behaves under pressure, and
-            whether the next person can understand the choices inside it.
+        <ol className="process-list">
+          {process.map(([number, title, text]) => (
+            <li key={number}>
+              <span>{number}</span>
+              <h3>{title}</h3>
+              <p>{text}</p>
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      <section className="about-section" id="about">
+        <div className="about-heading">
+          <p className="section-label">The practice</p>
+          <h2>Good software is considered, not merely assembled.</h2>
+        </div>
+        <div className="about-copy">
+          <p className="about-lead">
+            I work where product judgment and engineering meet—connecting the experience a
+            person needs with the system required to support it.
           </p>
           <p>
-            That has taken me from consumer event products and cloud-backed PWAs to a .NET
-            game mod, an iOS development pipeline, research tools, QR workflows, and
-            practical automation. Different outputs; the same discipline.
+            My projects span consumer event products, cloud-backed applications, iOS
+            development, a .NET game mod, interactive research, QR workflows, and practical
+            automation. The technology changes; the standard does not: clear decisions,
+            dependable behavior, and maintainable work.
           </p>
-          <div className="tool-cloud" aria-label="Technology experience">
-            <span><CodeXml />React / TypeScript</span>
-            <span><Cloud />Cloudflare / D1</span>
-            <span><Smartphone />SwiftUI / iOS</span>
-            <span><Braces />C# / .NET</span>
-            <span><Gauge />Testing / performance</span>
+          <div className="principles">
+            <div><LockKeyhole /><span><strong>Responsible by default</strong>Security and data handling are designed in, not added later.</span></div>
+            <div><Database /><span><strong>Built for the real flow</strong>Architecture follows the actual product need and its constraints.</span></div>
+            <div><CodeXml /><span><strong>Made understandable</strong>Documentation and explanation are part of the finished work.</span></div>
+          </div>
+          <div className="technology-list" aria-label="Technology experience">
+            <span><CodeXml /> React / TypeScript</span>
+            <span><Cloud /> Cloudflare / D1</span>
+            <span><Smartphone /> SwiftUI / iOS</span>
+            <span><Braces /> C# / .NET</span>
+            <span><Gauge /> Testing / performance</span>
           </div>
         </div>
       </section>
 
       <section className="contact-section" id="contact">
-        <p className="eyebrow"><span /> Now booking select projects</p>
-        <h2>Have an idea that deserves to become real?</h2>
+        <div>
+          <p className="section-label light"><span /> Available for select engagements</p>
+          <h2>Let&apos;s turn the right idea into working software.</h2>
+        </div>
         <div className="contact-bottom">
           <p>
-            Tell me what you&apos;re trying to build, improve, or untangle. I&apos;ll help you find
-            the clearest route from problem to working software.
+            Share what you are building, improving, or trying to untangle. I&apos;ll help you
+            identify the clearest route forward.
           </p>
           <div className="contact-placeholder" aria-label="Contact details pending">
-            <span>Contact details</span>
-            <strong>To be added</strong>
+            <span>Public contact details</span>
+            <strong>Ready to add</strong>
             <ArrowRight aria-hidden="true" />
           </div>
         </div>
       </section>
 
       <footer>
-        <a className="wordmark footer-mark" href="#top"><span>JPL</span></a>
+        <a className="wordmark footer-mark" href="#top" aria-label="Back to top"><span>JPL</span></a>
         <p>Joshua Perez Leduc<br />Independent software engineer</p>
-        <p>Web · Mobile · Cloud · Automation</p>
+        <p>Product · Web · Mobile · Cloud</p>
         <a href="#top">Back to top <ArrowDownRight aria-hidden="true" /></a>
       </footer>
     </main>
