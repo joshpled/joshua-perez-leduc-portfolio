@@ -1,4 +1,3 @@
-import Image from "next/image";
 import {
   ArrowDownRight,
   ArrowRight,
@@ -145,24 +144,24 @@ export default function Home() {
             </div>
           </div>
           <div className="showcase-visual boothline-visual">
-            <Image
+            {/* Project-owned image with fixed container dimensions. */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
               src="/projects/boothline-dashboard.png"
               alt="Boothline event dashboard showing live events and request activity"
-              fill
-              sizes="(max-width: 900px) 100vw, 52vw"
-              priority
             />
           </div>
         </article>
 
         <article className="showcase showcase-camera">
           <div className="showcase-visual camera-visual">
-            <Image
+            {/* Project-owned image; width and height preserve its square aspect ratio. */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
               src="/projects/event-camera-icon.png"
               alt="Our Wedding Camera app icon with gold film reels and JG monogram"
               width={1024}
               height={1024}
-              sizes="(max-width: 900px) 70vw, 32vw"
             />
             <div className="camera-caption">
               <Smartphone aria-hidden="true" />
