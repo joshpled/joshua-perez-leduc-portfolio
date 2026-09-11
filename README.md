@@ -15,6 +15,20 @@ npm run dev
 
 The development server prints the local URL. Use `npm run build` to create the production bundle.
 
+## Deploy to GitHub Pages
+
+GitHub Pages uses `.github/workflows/deploy-pages.yml`. A push to `main` installs the locked dependencies, runs the dedicated static export with `npm run build:pages`, and deploys the generated `out/` directory.
+
+The Pages build sets the repository base path at build time. This keeps framework assets, project images, and the favicon working at `https://joshpled.github.io/joshua-perez-leduc-portfolio/` while leaving local development and the existing Sites build at the domain root.
+
+To reproduce the Pages build locally:
+
+```bash
+GITHUB_PAGES=true GITHUB_REPOSITORY=joshpled/joshua-perez-leduc-portfolio npm run build:pages
+```
+
+The portfolio is presentation-only, so static hosting is sufficient. Adding server routes, runtime authentication, or a contact backend would require a different hosting decision.
+
 ## Content
 
 - `app/page.tsx` contains the portfolio structure and project case studies.
