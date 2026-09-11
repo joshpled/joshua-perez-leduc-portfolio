@@ -16,12 +16,15 @@
 - `app/layout.tsx` — document metadata and shell
 - `next.config.ts` — conditional GitHub Pages static export and base path
 - `.github/workflows/deploy-pages.yml` — build and deployment workflow for Pages
+- `public/brand` — approved All-Purpose Apps mark and app icon
 - `public/projects` — verified project-owned visuals
 - `README.md` — setup and content-maintenance notes
 - `ARCHITECTURE.md` — system and design rationale
 
 ## Decisions log
 
+- 2026-09-11 — Apply the owner-supplied geometric `A` identity and its forest-green, cream, and burnt-orange palette — the website now reflects the approved brand system across the header, hero, favicon, calls to action, and supporting interface. Gotcha: keep the company name as live HTML beside the mark, and replace the extracted PNGs in place if official vector exports become available.
+- 2026-09-11 — Rebrand the company portfolio as All-Purpose Apps with the line “Your ideas. Made from scratch.” — the name expresses versatile software capability across websites, web apps, mobile, desktop, and original products while keeping Joshua's personal role visible. Gotcha: flour-inspired cues must remain abstract and restrained; do not introduce bakery imagery or repeat the three core brand lines across multiple sections.
 - 2026-09-11 — Deploy the portfolio to GitHub Pages through a dedicated Next.js static-export workflow — the presentation-only site needs no server runtime, and an Actions artifact prevents GitHub's legacy Jekyll builder from rendering the README as the website. Gotcha: the repository base path is embedded at build time; a custom domain or repository rename requires revisiting that path.
 - 2026-09-11 — Curate the portfolio around seven owner-selected products: Boothline, Gatherroll, Wedding Dashboard, Builtproof, Lanes, When, and Noir — the lineup now emphasizes recent product judgment across event, operations, field-service, finance, native iOS, and cross-platform work. Gotcha: maturity labels are intentional; concepts and prototypes must not be described as production products without new evidence.
 - 2026-09-11 — Replace the experimental neon presentation with a restrained consulting-style visual system — the primary audience needs fast evidence of judgment, capability, and reliability. Deep navy, white, cool gray, and cobalt support that goal without erasing personality. Gotcha: contact details remain intentionally incomplete until the owner chooses public channels.

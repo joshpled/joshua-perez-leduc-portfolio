@@ -22,21 +22,21 @@ const assetBasePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 const services = [
   {
     icon: Layers3,
-    title: "Product development",
-    text: "Turn a concept into a focused, usable product—from scope and user flows through implementation and launch.",
-    details: ["Product definition", "UX and interface systems", "Full-stack implementation"],
+    title: "Websites & web apps",
+    text: "Create a sharp public presence or a capable browser-based product, built around what your customers and team actually need.",
+    details: ["Marketing and company websites", "Dashboards and web applications", "Platforms and integrations"],
   },
   {
-    icon: Cloud,
-    title: "Platforms & integrations",
-    text: "Connect interfaces to durable data, cloud infrastructure, third-party services, and secure user workflows.",
-    details: ["Cloud architecture", "API integrations", "Authentication and data"],
+    icon: Smartphone,
+    title: "Mobile & desktop apps",
+    text: "Build thoughtful native or cross-platform software that feels at home on the devices where people use it.",
+    details: ["iOS and Android products", "Desktop experiences", "Shared cross-platform systems"],
   },
   {
     icon: Sparkles,
-    title: "Custom engineering",
-    text: "Build the specialized automation, internal tool, or technical solution that an off-the-shelf product cannot provide.",
-    details: ["Workflow automation", "Internal tools", "Technical prototypes"],
+    title: "Original products",
+    text: "Shape an ambitious idea into focused software—from the first useful version to a product ready to grow.",
+    details: ["Product definition", "Prototypes and internal tools", "Full-cycle engineering"],
   },
 ];
 
@@ -129,11 +129,14 @@ export default function Home() {
   return (
     <main>
       <header className="site-header">
-        <a className="wordmark" href="#top" aria-label="Joshua Perez Leduc, home">
-          <span>JPL</span>
+        <a className="wordmark" href="#top" aria-label="All-Purpose Apps, home">
+          <span className="wordmark-symbol" aria-hidden="true">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={`${assetBasePath}/brand/all-purpose-apps-mark.png`} alt="" />
+          </span>
           <span className="wordmark-copy">
-            Joshua Perez Leduc
-            <small>Independent software engineer</small>
+            All-Purpose Apps
+            <small>Custom software for businesses and big ideas.</small>
           </span>
         </a>
         <nav aria-label="Primary navigation">
@@ -150,14 +153,15 @@ export default function Home() {
         <div className="hero-main">
           <div className="hero-content">
             <p className="eyebrow">
-              <span /> Available for select freelance projects
+              <span /> All-purpose skills. Built for your purpose.
             </p>
             <h1>
-              Software, designed with purpose. <em>Engineered to last.</em>
+              Your ideas.{" "}<em>Made from scratch.</em>
             </h1>
             <p className="hero-copy">
-              I help founders and teams turn early ideas and complex requirements into
-              clear, dependable digital products—from first decision to working software.
+              I&apos;m Josh, the developer behind All-Purpose Apps. I build websites, web apps,
+              mobile apps, desktop apps, and original products for people ready to make
+              something useful, ambitious, or entirely new.
             </p>
             <div className="hero-actions">
               <a className="primary-link" href="#work">
@@ -170,16 +174,19 @@ export default function Home() {
           </div>
 
           <aside className="hero-profile">
-            <p>Independent engineering practice</p>
-            <div className="profile-monogram" aria-hidden="true">JPL</div>
+            <p>Independent software company</p>
+            <div className="profile-monogram" aria-hidden="true">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={`${assetBasePath}/brand/all-purpose-apps-mark.png`} alt="" />
+            </div>
             <dl>
               <div>
                 <dt>Focus</dt>
-                <dd>Product and platform engineering</dd>
+                <dd>Custom software and original products</dd>
               </div>
               <div>
                 <dt>Capabilities</dt>
-                <dd>Web, mobile, cloud, and automation</dd>
+                <dd>Websites, apps, mobile, and desktop</dd>
               </div>
               <div>
                 <dt>Engagement</dt>
@@ -190,9 +197,9 @@ export default function Home() {
         </div>
 
         <div className="credibility-rail" aria-label="Portfolio highlights">
-          <span><strong>07</strong> verified case studies</span>
-          <span><strong>Full-cycle</strong> product delivery</span>
-          <span><strong>Multi-platform</strong> engineering experience</span>
+          <span><strong>07</strong> selected products</span>
+          <span><strong>From scratch</strong> through launch</span>
+          <span><strong>All-purpose</strong> across platforms</span>
         </div>
       </section>
 
@@ -291,12 +298,12 @@ export default function Home() {
       <section className="services-section" id="services">
         <div className="section-header">
           <div>
-            <p className="section-label">Services</p>
-            <h2>One partner across the whole problem.</h2>
+            <p className="section-label">What I build</p>
+            <h2>One versatile partner. Whatever the platform.</h2>
           </div>
           <p>
-            Clear enough to discuss the business need, technical enough to build the system,
-            and disciplined enough to leave it understandable.
+            Bring me the goal, the rough sketch, or the stubborn problem. I&apos;ll help choose
+            the right shape for it and turn it into software people can rely on.
           </p>
         </div>
         <div className="service-grid">
@@ -314,8 +321,8 @@ export default function Home() {
 
       <section className="process-section">
         <div className="process-intro">
-          <p className="section-label light">How I work</p>
-          <h2>Clarity at every stage.</h2>
+          <p className="section-label light">How it gets made</p>
+          <h2>Built carefully, from the first measure.</h2>
           <p>
             You should always understand what is being built, why a decision was made, and
             what comes next. The process is structured to keep progress visible.
@@ -334,19 +341,20 @@ export default function Home() {
 
       <section className="about-section" id="about">
         <div className="about-heading">
-          <p className="section-label">The practice</p>
-          <h2>Good software is considered, not merely assembled.</h2>
+          <p className="section-label">The company</p>
+          <h2>Broad capability. Personal attention.</h2>
         </div>
         <div className="about-copy">
           <p className="about-lead">
-            I work where product judgment and engineering meet—connecting the experience a
-            person needs with the system required to support it.
+            All-Purpose Apps is my software development company, built to give businesses
+            and big ideas one dependable path from possibility to working product.
           </p>
           <p>
-            My selected work spans live-event products, wedding operations, field-service
-            workflows, consumer finance, native iOS scheduling, and cross-platform mobile
-            products. The technology changes; the standard does not: clear decisions,
-            dependable behavior, and maintainable work.
+            The name borrows the spirit of all-purpose flour: a versatile foundation that
+            adapts to the job at hand. For me, that can mean a focused website, a business
+            web app, a native mobile experience, a desktop tool, or an original product.
+            The technology changes; my standard stays the same—clear decisions, dependable
+            behavior, and work you can understand.
           </p>
           <div className="principles">
             <div><LockKeyhole /><span><strong>Risk made explicit</strong>Security and data tradeoffs are documented and matched to the product stage.</span></div>
@@ -366,12 +374,12 @@ export default function Home() {
       <section className="contact-section" id="contact">
         <div>
           <p className="section-label light"><span /> Available for select engagements</p>
-          <h2>Let&apos;s turn the right idea into working software.</h2>
+          <h2>Bring the idea. Let&apos;s make it real.</h2>
         </div>
         <div className="contact-bottom">
           <p>
-            Share what you are building, improving, or trying to untangle. I&apos;ll help you
-            identify the clearest route forward.
+            Tell me what you&apos;re building, improving, or trying to untangle. I&apos;ll bring the
+            range to find the clearest route forward—and the care to build it well.
           </p>
           <div className="contact-placeholder" aria-label="Contact details pending">
             <span>Public contact details</span>
@@ -382,9 +390,14 @@ export default function Home() {
       </section>
 
       <footer>
-        <a className="wordmark footer-mark" href="#top" aria-label="Back to top"><span>JPL</span></a>
-        <p>Joshua Perez Leduc<br />Independent software engineer</p>
-        <p>Product · Web · Mobile · Cloud</p>
+        <a className="wordmark footer-mark" href="#top" aria-label="All-Purpose Apps, back to top">
+          <span className="wordmark-symbol" aria-hidden="true">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={`${assetBasePath}/brand/all-purpose-apps-mark.png`} alt="" />
+          </span>
+        </a>
+        <p>All-Purpose Apps<br />By Joshua Perez Leduc</p>
+        <p>Web · Mobile · Desktop · Products</p>
         <a href="#top">Back to top <ArrowDownRight aria-hidden="true" /></a>
       </footer>
     </main>

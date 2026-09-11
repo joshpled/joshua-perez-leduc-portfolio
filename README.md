@@ -1,8 +1,8 @@
-# Joshua Perez Leduc — Software Engineer
+# All-Purpose Apps
 
-A responsive freelance software-engineering portfolio built around verified project work. The site presents Joshua's product, full-stack, mobile, cloud, and automation experience without overstating the maturity of unpublished concepts.
+A responsive company portfolio for All-Purpose Apps, Joshua Perez Leduc's independent software development company. The company builds websites, web apps, mobile apps, desktop apps, and original software products.
 
-The visual direction is intentionally business-focused: restrained navy and cobalt, clear service positioning, evidence-led case studies, and generous spacing suitable for prospective clients or hiring teams.
+The visual direction is intentionally business-focused: deep forest green, warm cream, and a restrained burnt-orange accent frame clear service positioning, evidence-led case studies, and generous spacing. The supplied geometric `A` mark, fine grain, and measured linework nod to the all-purpose-flour reference without turning the company into a bakery brand.
 
 ## Run locally
 
@@ -33,7 +33,16 @@ The portfolio is presentation-only, so static hosting is sufficient. Adding serv
 
 - `app/page.tsx` contains the portfolio structure and project case studies.
 - `app/globals.css` contains the visual system and responsive layout.
+- `public/brand` contains the approved All-Purpose Apps mark and app icon.
 - `public/projects` contains project-owned imagery reused with the portfolio.
+
+## Brand language
+
+- Main descriptor: “Custom software for businesses and big ideas.”
+- Hero tagline: “Your ideas. Made from scratch.”
+- Supporting tagline: “All-purpose skills. Built for your purpose.”
+
+Each line has one primary placement so the brand remains memorable without becoming repetitive.
 
 ## Contact details
 
