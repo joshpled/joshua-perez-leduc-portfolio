@@ -3,7 +3,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Freelance Software Engineer | Joshua Perez Leduc",
-  description: "Independent software engineer building dependable web, mobile, cloud, and custom software products.",
+  description: "Independent software engineer building focused web, mobile, SaaS, cloud, and custom software products.",
   icons: {
     icon: "/favicon.svg",
     shortcut: "/favicon.svg",

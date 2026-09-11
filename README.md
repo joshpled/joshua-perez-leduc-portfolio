@@ -25,6 +25,10 @@ The development server prints the local URL. Use `npm run build` to create the p
 
 The public email and profile links are intentionally left as a visible placeholder until the owner chooses which details to publish. Replace the `contact-placeholder` block in `app/page.tsx` when those details are available.
 
+## Selected projects
+
+The portfolio presents seven owner-selected products: Boothline, Gatherroll, Wedding Dashboard, Builtproof, Lanes, When, and Noir. Boothline and Gatherroll receive expanded case studies; the remaining five use compact evidence cards so the page stays scannable.
+
 ## Project claims
 
-Portfolio copy is based on the local project documentation and source available in the workspace. Boothline is labeled as an interactive product concept. No client counts, business outcomes, or production status are implied where they were not verified.
+Portfolio copy is based on local source plus the owner's public and private GitHub repositories. Product maturity is stated where relevant: Boothline, Lanes, and Noir are presented as concepts or prototypes, and no client counts, business outcomes, or production status are implied where they were not verified.
