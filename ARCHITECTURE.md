@@ -12,11 +12,12 @@ The visual thesis is a focused independent engineering consultancy: calm, credib
 
 ## Content model
 
-The portfolio has three levels of evidence:
+The portfolio has two levels of evidence:
 
-1. Two expanded case studies for Boothline and Event Camera Platform.
-2. Three compact project cards for DJ Request List, Velocity Overdrive, and the Solo Developer's Stack Guide.
-3. A concise technology summary that acknowledges additional iOS, QR, PDF, and automation work without presenting unverified case-study details.
+1. Two expanded case studies for Boothline and Gatherroll, both supported by project-owned imagery and challenge/solution context.
+2. Five compact evidence cards for Wedding Dashboard, Builtproof, Lanes, When, and Noir. The six-column grid creates a balanced two-card row followed by a three-card row on desktop, then collapses to one column for narrower screens.
+
+Maturity labels separate working tools from concepts and prototypes. The concise technology summary reflects the selected projects' actual web, cloud, iOS, and cross-platform stacks without implying unverified outcomes.
 
 ## Deployment
 
