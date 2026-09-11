@@ -4,8 +4,8 @@ import "./globals.css";
 const assetBasePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
 export const metadata: Metadata = {
-  title: "Freelance Software Engineer | Joshua Perez Leduc",
-  description: "Independent software engineer building focused web, mobile, SaaS, cloud, and custom software products.",
+  title: "All-Purpose Apps | Custom Software for Businesses and Big Ideas",
+  description: "All-Purpose Apps builds websites, web apps, mobile apps, desktop apps, and original software products.",
   icons: {
     icon: `${assetBasePath}/favicon.svg`,
     shortcut: `${assetBasePath}/favicon.svg`,
