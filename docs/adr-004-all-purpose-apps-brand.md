@@ -14,21 +14,22 @@ Present the business as **All-Purpose Apps**, with Joshua clearly identified as 
 - “Your ideas. Made from scratch.” as the hero promise
 - “All-purpose skills. Built for your purpose.” as the supporting line
 
-Keep the existing navy and cobalt authority while warming white surfaces slightly. Express the name's origin through an `AP` maker's seal, fine-grain texture, and measurement-like ticks rather than food photography, illustrations, or bakery language.
+Use the owner-supplied geometric `A` identity in two forms: a transparent standalone mark for the interface and a rounded-square icon for browser and device metadata. Build the site palette from the same deep forest green, warm cream, and burnt orange. Keep the company name as live text beside the mark rather than baking important wording into an image. Express the name's origin through fine-grain texture and measurement-like ticks rather than food photography, illustrations, or bakery language.
 
 ## Why
 
 - The company name can grow beyond a personal freelance identity while the copy retains Joshua's direct voice.
 - The service model becomes explicit across web, mobile, desktop, and original product work.
-- A small set of repeatable visual cues makes the brand distinctive without competing with project evidence.
+- The supplied mark and palette make the identity distinctive without competing with project evidence.
 - Giving each core line one job avoids repetitive marketing copy.
+- Live wordmark text stays accessible, responsive, and immune to image-generation spelling errors.
 
 ## Alternatives rejected
 
 - **Literal flour or bakery imagery:** memorable, but likely to obscure what the company sells.
-- **A complete palette replacement:** unnecessary because the existing navy and cobalt already signal technical credibility.
+- **Using the full badge as the primary header logo:** too dense at small sizes and would turn important company text into inaccessible pixels.
 - **Removing Joshua from the story:** would sacrifice the personal trust that is valuable to freelance and small-company clients.
 
 ## Consequences
 
-Future copy should describe All-Purpose Apps as the company and Joshua as the person behind it. New visual elements should reuse the maker's-mark language rather than introduce unrelated motifs, and the three core brand lines should remain concentrated in their current roles.
+Future copy should describe All-Purpose Apps as the company and Joshua as the person behind it. New visual elements should reuse the supplied geometric-mark language and forest/cream/orange palette rather than introduce unrelated motifs. The three core brand lines should remain concentrated in their current roles. The source image is a presentation board, so production use relies on the extracted standalone mark and app icon in `public/brand`; replace those files in place if official vector exports become available.

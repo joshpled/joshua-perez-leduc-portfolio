@@ -7,8 +7,9 @@ export const metadata: Metadata = {
   title: "All-Purpose Apps | Custom Software for Businesses and Big Ideas",
   description: "All-Purpose Apps builds websites, web apps, mobile apps, desktop apps, and original software products.",
   icons: {
-    icon: `${assetBasePath}/favicon.svg`,
-    shortcut: `${assetBasePath}/favicon.svg`,
+    icon: `${assetBasePath}/brand/all-purpose-apps-icon.png`,
+    shortcut: `${assetBasePath}/brand/all-purpose-apps-icon.png`,
+    apple: `${assetBasePath}/brand/all-purpose-apps-icon.png`,
   },
 };
 

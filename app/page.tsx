@@ -130,7 +130,10 @@ export default function Home() {
     <main>
       <header className="site-header">
         <a className="wordmark" href="#top" aria-label="All-Purpose Apps, home">
-          <span>AP</span>
+          <span className="wordmark-symbol" aria-hidden="true">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={`${assetBasePath}/brand/all-purpose-apps-mark.png`} alt="" />
+          </span>
           <span className="wordmark-copy">
             All-Purpose Apps
             <small>Custom software for businesses and big ideas.</small>
@@ -172,7 +175,10 @@ export default function Home() {
 
           <aside className="hero-profile">
             <p>Independent software company</p>
-            <div className="profile-monogram" aria-hidden="true"><span>AP</span></div>
+            <div className="profile-monogram" aria-hidden="true">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={`${assetBasePath}/brand/all-purpose-apps-mark.png`} alt="" />
+            </div>
             <dl>
               <div>
                 <dt>Focus</dt>
@@ -384,7 +390,12 @@ export default function Home() {
       </section>
 
       <footer>
-        <a className="wordmark footer-mark" href="#top" aria-label="All-Purpose Apps, back to top"><span>AP</span></a>
+        <a className="wordmark footer-mark" href="#top" aria-label="All-Purpose Apps, back to top">
+          <span className="wordmark-symbol" aria-hidden="true">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={`${assetBasePath}/brand/all-purpose-apps-mark.png`} alt="" />
+          </span>
+        </a>
         <p>All-Purpose Apps<br />By Joshua Perez Leduc</p>
         <p>Web · Mobile · Desktop · Products</p>
         <a href="#top">Back to top <ArrowDownRight aria-hidden="true" /></a>
