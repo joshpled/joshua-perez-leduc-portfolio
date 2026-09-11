@@ -17,6 +17,8 @@ import {
   WalletCards,
 } from "lucide-react";
 
+const assetBasePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+
 const services = [
   {
     icon: Layers3,
@@ -116,7 +118,7 @@ const supportingProjects = [
   },
 ];
 
-const process = [
+const deliveryProcess = [
   ["01", "Frame", "Clarify the outcome, audience, constraints, and riskiest assumptions before implementation starts."],
   ["02", "Shape", "Translate the problem into a focused product flow and a technical plan you can understand."],
   ["03", "Build", "Deliver working software in reviewable slices, with decisions and tradeoffs made visible."],
@@ -229,7 +231,7 @@ export default function Home() {
           </div>
           <div className="case-visual boothline-visual">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/projects/boothline-dashboard.png" alt="Boothline event dashboard showing event and request activity" />
+            <img src={`${assetBasePath}/projects/boothline-dashboard.png`} alt="Boothline event dashboard showing event and request activity" />
             <span>Host workspace</span>
           </div>
         </article>
@@ -237,7 +239,7 @@ export default function Home() {
         <article className="case-study camera-case">
           <div className="case-visual camera-visual">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/projects/event-camera-icon.png" alt="Gatherroll application icon" width={1024} height={1024} />
+            <img src={`${assetBasePath}/projects/event-camera-icon.png`} alt="Gatherroll application icon" width={1024} height={1024} />
             <div className="visual-note">
               <Smartphone aria-hidden="true" />
               <span>Designed around the phone already in every guest&apos;s hand</span>
@@ -320,7 +322,7 @@ export default function Home() {
           </p>
         </div>
         <ol className="process-list">
-          {process.map(([number, title, text]) => (
+          {deliveryProcess.map(([number, title, text]) => (
             <li key={number}>
               <span>{number}</span>
               <h3>{title}</h3>

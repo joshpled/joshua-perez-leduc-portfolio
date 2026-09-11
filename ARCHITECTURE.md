@@ -21,4 +21,9 @@ Maturity labels separate working tools from concepts and prototypes. The concise
 
 ## Deployment
 
-OpenAI Sites builds the application for a Cloudflare-compatible runtime. The `.openai/hosting.json` file keeps only the Sites project association and optional platform bindings. This site currently needs no runtime bindings.
+The repository supports two explicit build targets:
+
+1. `npm run build` keeps the existing OpenAI Sites/Vinext path for a Cloudflare-compatible runtime. `.openai/hosting.json` stores only the Sites project association and optional platform bindings.
+2. `npm run build:pages` uses Next.js static export for GitHub Pages. The Pages workflow supplies the repository name, and `next.config.ts` converts it into the `/joshua-perez-leduc-portfolio` base path used by framework and public assets.
+
+The Pages output is static by design. There are no runtime bindings, server routes, authentication checks, or form handlers to reproduce. If one of those is added later, Pages compatibility must be reconsidered rather than assuming the static export still represents the full application.
