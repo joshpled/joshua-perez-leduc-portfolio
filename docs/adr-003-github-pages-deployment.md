@@ -10,7 +10,7 @@ The portfolio currently has one route and no runtime database, authentication, A
 
 Build and deploy the site through GitHub Actions. The workflow runs a dedicated Next.js static export and publishes the generated `out/` directory as a Pages artifact.
 
-The Pages build derives `/joshua-perez-leduc-portfolio` from `GITHUB_REPOSITORY` and embeds it as the application base path. Local development and the existing Sites build keep an empty base path.
+The Pages build derives `/joshua-perez-leduc-portfolio` from `GITHUB_REPOSITORY` and embeds it as the application base path by default. When `PAGES_CUSTOM_DOMAIN=true`, it uses an empty base path for the custom-domain root. Local development and the existing Sites build also keep an empty base path.
 
 ## Why
 
@@ -27,4 +27,4 @@ The Pages build derives `/joshua-perez-leduc-portfolio` from `GITHUB_REPOSITORY`
 
 ## Consequences
 
-The site remains static on Pages. A repository rename or custom domain changes the path assumptions, and future server-side features require a new hosting decision.
+The site remains static on Pages. A repository rename changes the fallback path assumption, while the custom-domain switch is coordinated through ADR 005. Future server-side features require a new hosting decision.
