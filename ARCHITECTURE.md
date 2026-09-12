@@ -8,7 +8,7 @@ The page is intentionally server-renderable. Project content lives beside its ma
 
 ## Visual system
 
-The visual thesis is a versatile independent software company: personal, enthusiastic, credible, and precise. Deep forest green establishes trust, warm cream surfaces reference the name's origin, and burnt orange identifies highlights and technical details. The supplied geometric `A` identity is used as imagery while the company name remains live HTML for accessibility, responsive clarity, and reliable spelling. Fine grain and measurement-like ticks provide subtle all-purpose-flour cues without using bakery imagery. Generous spacing and a consistent card system prioritize the work over decoration. Project imagery remains limited to verified, project-owned assets.
+The visual thesis is a versatile independent software company: personal, enthusiastic, credible, and precise. Deep forest green establishes trust, warm cream surfaces reference the name's origin, and burnt orange identifies highlights and technical details. The supplied geometric `A` identity is used as imagery while the company name remains live HTML in navigation for accessibility, responsive clarity, and reliable spelling. The brand kit's traced, path-based badge appears as a centered masthead at the top of the hero, preserving the approved lettering and proportions while remaining sharp at every screen density. Fine grain and measurement-like ticks provide subtle all-purpose-flour cues without using bakery imagery. Generous spacing and a consistent card system prioritize the work over decoration. Project imagery remains limited to verified, project-owned assets.
 
 ## Content model
 

@@ -150,6 +150,13 @@ export default function Home() {
       </header>
 
       <section className="hero" id="top">
+        <div className="brand-masthead">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={`${assetBasePath}/brand/all-purpose-apps-seal.svg`}
+            alt="All-Purpose Apps brand seal"
+          />
+        </div>
         <div className="hero-main">
           <div className="hero-content">
             <p className="eyebrow">

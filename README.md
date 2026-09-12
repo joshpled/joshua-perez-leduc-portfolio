@@ -33,7 +33,7 @@ The portfolio is presentation-only, so static hosting is sufficient. Adding serv
 
 - `app/page.tsx` contains the portfolio structure and project case studies.
 - `app/globals.css` contains the visual system and responsive layout.
-- `public/brand` contains the approved All-Purpose Apps mark and app icon.
+- `public/brand` contains the approved All-Purpose Apps mark, app icon, and outlined vector brand seal.
 - `public/projects` contains project-owned imagery reused with the portfolio.
 
 ## Brand language
