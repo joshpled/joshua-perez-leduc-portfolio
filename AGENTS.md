@@ -7,15 +7,13 @@
 - Typecheck: `npx tsc --noEmit`
 - Lint: `npm run lint`
 - Build: `npm run build`
-- Build for GitHub Pages: `GITHUB_PAGES=true GITHUB_REPOSITORY=joshpled/joshua-perez-leduc-portfolio npm run build:pages`
 
 ## Structure
 
 - `app/page.tsx` — single-route portfolio content
 - `app/globals.css` — theme, layout, responsive behavior
 - `app/layout.tsx` — document metadata and shell
-- `next.config.ts` — conditional GitHub Pages static export and base path
-- `.github/workflows/deploy-pages.yml` — build and deployment workflow for Pages
+- `next.config.ts` — native Next.js configuration used by Vercel
 - `public/brand` — approved All-Purpose Apps mark and app icon
 - `public/projects` — verified project-owned visuals
 - `README.md` — setup and content-maintenance notes
@@ -23,6 +21,7 @@
 
 ## Decisions log
 
+- 2026-09-12 — Move the commercial portfolio from GitHub Pages to Vercel Pro before adding contact delivery — native Next.js hosting supports a server-side form handler, deployment previews, and commercial use without maintaining a parallel adapter. Gotcha: preserve Squarespace MX and TXT records during the web DNS cutover so `info@allpurposeapps.com` continues working.
 - 2026-09-12 — Make GitHub Pages builds switchable between the repository path and `allpurposeapps.com` — a repository variable enables a coordinated Squarespace DNS cutover without merging a build that immediately breaks the current public URL. Gotcha: `PAGES_CUSTOM_DOMAIN` must equal `true` only after the GitHub custom-domain setting and DNS are ready; set it to `false` and redeploy when rolling back.
 - 2026-09-12 — Integrate the full All-Purpose Apps badge directly into the opening hero — pairing the badge with the primary message creates one cohesive composition and removes a duplicated company-summary card. Gotcha: the badge moves above the headline below the tablet breakpoint, while capability details remain in Services and About.
 - 2026-09-12 — Use the brand kit's traced full-color badge as the hero masthead — the path-based asset preserves the approved badge lettering and proportions without the blur of the supplied JPG, while keeping the compact `A` mark in navigation and the company card. Gotcha: this is a high-fidelity trace of raster artwork rather than an original design-source vector; keep using `badge-full-color-transparent.svg` from the approved kit if the asset is regenerated.
