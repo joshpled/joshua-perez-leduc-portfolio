@@ -153,7 +153,7 @@ export default function Home() {
         <div className="brand-masthead">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src={`${assetBasePath}/brand/all-purpose-apps-seal.jpg`}
+            src={`${assetBasePath}/brand/all-purpose-apps-seal.svg`}
             alt="All-Purpose Apps brand seal"
           />
         </div>
