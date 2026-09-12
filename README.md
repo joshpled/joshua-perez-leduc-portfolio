@@ -19,13 +19,36 @@ The development server prints the local URL. Use `npm run build` to create the p
 
 GitHub Pages uses `.github/workflows/deploy-pages.yml`. A push to `main` installs the locked dependencies, runs the dedicated static export with `npm run build:pages`, and deploys the generated `out/` directory.
 
-The Pages build sets the repository base path at build time. This keeps framework assets, project images, and the favicon working at `https://joshpled.github.io/joshua-perez-leduc-portfolio/` while leaving local development and the existing Sites build at the domain root.
+The Pages build supports two URL shapes:
+
+- With the repository variable `PAGES_CUSTOM_DOMAIN` unset or set to anything except `true`, the build uses `/joshua-perez-leduc-portfolio` and remains available at `https://joshpled.github.io/joshua-perez-leduc-portfolio/`.
+- With `PAGES_CUSTOM_DOMAIN=true`, the build uses the domain root for `https://allpurposeapps.com/`.
+
+Keeping the switch in a repository variable lets the custom-domain cutover and rollback happen without another code change. Local development and the existing Sites build always use the domain root.
 
 To reproduce the Pages build locally:
 
 ```bash
 GITHUB_PAGES=true GITHUB_REPOSITORY=joshpled/joshua-perez-leduc-portfolio npm run build:pages
 ```
+
+To reproduce the custom-domain build locally:
+
+```bash
+GITHUB_PAGES=true PAGES_CUSTOM_DOMAIN=true npm run build:pages
+```
+
+### Custom-domain cutover
+
+1. Verify `allpurposeapps.com` in the GitHub account Pages settings using GitHub's TXT record.
+2. In the repository Pages settings, set `allpurposeapps.com` as the custom domain.
+3. In Squarespace DNS, point the root domain to GitHub Pages with four `A` records: `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, and `185.199.111.153`.
+4. Point `www` to `joshpled.github.io` with a `CNAME` record. Preserve unrelated TXT and email records.
+5. Set the repository Actions variable `PAGES_CUSTOM_DOMAIN` to `true`, then run the Pages workflow.
+6. After GitHub provisions the certificate, enable **Enforce HTTPS**.
+7. In Squarespace, permanently forward the `.app`, `.net`, `.org`, and `allpurpose.app` domains to `https://allpurposeapps.com`.
+
+For rollback, remove the custom domain in the repository Pages settings, set `PAGES_CUSTOM_DOMAIN` to `false`, and rerun the Pages workflow. The original `github.io` project URL will work again.
 
 The portfolio is presentation-only, so static hosting is sufficient. Adding server routes, runtime authentication, or a contact backend would require a different hosting decision.
 

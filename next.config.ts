@@ -1,13 +1,15 @@
 import type { NextConfig } from "next";
 
 const isGitHubPagesBuild = process.env.GITHUB_PAGES === "true";
+const usesCustomDomain = process.env.PAGES_CUSTOM_DOMAIN === "true";
 const repositoryName = process.env.GITHUB_REPOSITORY?.split("/")[1];
+const usesRepositoryBasePath = isGitHubPagesBuild && !usesCustomDomain;
 
-if (isGitHubPagesBuild && !repositoryName) {
+if (usesRepositoryBasePath && !repositoryName) {
   throw new Error("GITHUB_REPOSITORY is required for a GitHub Pages build.");
 }
 
-const basePath = isGitHubPagesBuild ? `/${repositoryName}` : "";
+const basePath = usesRepositoryBasePath ? `/${repositoryName}` : "";
 
 const nextConfig: NextConfig = {
   ...(isGitHubPagesBuild
