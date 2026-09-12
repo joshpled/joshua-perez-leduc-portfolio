@@ -87,7 +87,8 @@ nav > a:not(.nav-cta):hover, nav > a:not(.nav-cta):focus-visible { color: var(--
 .profile-monogram { position: relative; height: 155px; display: grid; place-items: center; margin: 20px 0; overflow: hidden; border: 1px solid rgba(11,48,41,.08); border-radius: 12px; background: linear-gradient(145deg, #fffaf0, #f1e7d8); }
 .profile-monogram::before { content: ""; position: absolute; width: 112px; height: 112px; border: 1px solid rgba(11,48,41,.15); border-radius: 50%; box-shadow: 0 0 0 12px rgba(11,48,41,.035), 0 0 0 30px rgba(11,48,41,.02); }
 .profile-monogram::after { content: "01 / CUSTOM"; position: absolute; right: 13px; bottom: 11px; color: rgba(11,48,41,.52); font: 600 .54rem/1 var(--font-mono); letter-spacing: .08em; }
-.profile-monogram img { position: relative; z-index: 1; width: min(60%, 190px); height: 76%; object-fit: contain; transform: translateY(-7.5%); filter: drop-shadow(0 12px 24px rgba(11,48,41,.11)); }
+/* The visible mark sits 7.5% below its PNG canvas midpoint, so anchor the canvas and compensate optically. */
+.profile-monogram img { position: absolute; left: 50%; top: 50%; z-index: 1; width: min(60%, 190px); height: auto; transform: translate(-50%, -57.5%); filter: drop-shadow(0 12px 24px rgba(11,48,41,.11)); }
 .hero-profile dl { margin: 0; }
 .hero-profile dl div { padding: 13px 0; border-top: 1px solid #dde3ec; }
 .hero-profile dt { color: #7b879b; font-size: .66rem; font-weight: 680; text-transform: uppercase; letter-spacing: .06em; }
