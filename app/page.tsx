@@ -175,9 +175,12 @@ export default function Home() {
 
           <aside className="hero-profile">
             <p>Independent software company</p>
-            <div className="profile-monogram" aria-hidden="true">
+            <div className="profile-seal">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={`${assetBasePath}/brand/all-purpose-apps-mark.png`} alt="" />
+              <img
+                src={`${assetBasePath}/brand/all-purpose-apps-seal.svg`}
+                alt="All-Purpose Apps brand seal"
+              />
             </div>
             <dl>
               <div>
@@ -343,14 +346,6 @@ export default function Home() {
         <div className="about-heading">
           <p className="section-label">The company</p>
           <h2>Broad capability. Personal attention.</h2>
-          <div className="company-seal">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={`${assetBasePath}/brand/all-purpose-apps-seal.svg`}
-              alt="All-Purpose Apps brand seal"
-              loading="lazy"
-            />
-          </div>
         </div>
         <div className="about-copy">
           <p className="about-lead">
