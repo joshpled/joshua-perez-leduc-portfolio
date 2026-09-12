@@ -172,6 +172,8 @@ nav > a:not(.nav-cta):hover, nav > a:not(.nav-cta):focus-visible { color: var(--
 
 .about-section { display: grid; grid-template-columns: minmax(340px, 1fr) minmax(430px, .8fr); gap: clamp(70px, 11vw, 180px); background: var(--surface); }
 .about-heading h2 { max-width: 780px; margin: 20px 0 0; font-size: clamp(3rem, 6.2vw, 6rem); line-height: .96; letter-spacing: -.06em; }
+.company-seal { max-width: 700px; margin-top: clamp(42px, 6vw, 76px); overflow: hidden; border: 1px solid rgba(11,48,41,.12); border-radius: 16px; background: var(--flour-white); box-shadow: 0 18px 50px rgba(11,48,41,.07); }
+.company-seal img { display: block; width: 100%; height: auto; }
 .about-copy { align-self: end; }
 .about-lead { margin: 0 0 24px; color: #31425d; font-size: clamp(1.15rem, 1.65vw, 1.45rem); line-height: 1.55; }
 .about-copy > p:not(.about-lead) { margin: 0; color: #617087; line-height: 1.68; }

@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 500" role="img" aria-labelledby="title description">
+  <title id="title">All-Purpose Apps brand seal</title>
+  <desc id="description">A forest-green outlined badge with the All-Purpose Apps mark, company name, and the phrase Your ideas. Made from scratch.</desc>
+  <rect width="1200" height="500" fill="#fffdf7"/>
+  <path d="M282 40H918c28 0 52 7 77 20l126 68c23 13 37 37 37 64v116c0 27-14 51-37 64l-126 68c-25 13-49 20-77 20H282c-28 0-52-7-77-20L79 372c-23-13-37-37-37-64V192c0-27 14-51 37-64l126-68c25-13 49-20 77-20Z" fill="none" stroke="#0b3029" stroke-width="8"/>
+
+  <g fill="#0b3029" font-family="Inter, Arial, sans-serif" font-weight="750" letter-spacing="6" text-anchor="middle">
+    <text x="300" y="116" font-size="23">BUILD</text>
+    <text x="300" y="148" font-size="23">LAUNCH</text>
+    <text x="300" y="180" font-size="23">GROW</text>
+    <text x="900" y="116" font-size="23">IDEAS</text>
+    <text x="900" y="148" font-size="23">INTO</text>
+    <text x="900" y="180" font-size="23">APPS</text>
+  </g>
+
+  <g transform="translate(503 58) scale(3.02)">
+    <path d="M11.4 49.8 27.1 17.2c1-2.1 2.9-3.3 5.2-3.3h3.4c.8 0 1.2.9.6 1.5L24.7 49.1a4.5 4.5 0 0 1-4.2 2.8h-7.8a1.5 1.5 0 0 1-1.3-2.1Z" fill="#0b3029"/>
+    <path d="m38.6 17.3 1.2-1.9c1.2-2 4.2-1.8 5.1.4l11.7 33.9a1.6 1.6 0 0 1-1.5 2.2h-7.4a4.8 4.8 0 0 1-4.4-2.9L33.2 27.8l5.4-10.5Z" fill="#0b3029"/>
+    <path d="M28.1 35.5c4.2 1 7.2 3 9.5 6.1 3.8 5.1 5.7 8.1 8.5 10.3h-6.4c-4.1 0-7.4-1.4-10.6-4.3l-4.2-3.8 3.2-8.3Z" fill="#d95727"/>
+  </g>
+
+  <path d="M278 205h44M878 205h44" stroke="#0b3029" stroke-width="5" stroke-linecap="round"/>
+  <text x="600" y="328" fill="#0b3029" font-family="Arial Narrow, Inter, Arial, sans-serif" font-size="92" font-stretch="condensed" font-weight="850" letter-spacing="-3" text-anchor="middle">ALL-PURPOSE</text>
+
+  <path d="M264 382h210M726 382h210" stroke="#0b3029" stroke-width="6" stroke-linecap="round"/>
+  <text x="600" y="400" fill="#0b3029" font-family="Inter, Arial, sans-serif" font-size="54" font-weight="760" letter-spacing="18" text-anchor="middle">APPS</text>
+  <text x="600" y="438" fill="#0b3029" font-family="Inter, Arial, sans-serif" font-size="19" font-weight="700" letter-spacing="6" text-anchor="middle">YOUR IDEAS. MADE FROM SCRATCH.</text>
+</svg>
