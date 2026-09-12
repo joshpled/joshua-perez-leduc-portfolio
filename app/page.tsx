@@ -17,8 +17,6 @@ import {
   WalletCards,
 } from "lucide-react";
 
-const assetBasePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
-
 const services = [
   {
     icon: Layers3,
@@ -132,7 +130,7 @@ export default function Home() {
         <a className="wordmark" href="#top" aria-label="All-Purpose Apps, home">
           <span className="wordmark-symbol" aria-hidden="true">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={`${assetBasePath}/brand/all-purpose-apps-mark.png`} alt="" />
+            <img src="/brand/all-purpose-apps-mark.png" alt="" />
           </span>
           <span className="wordmark-copy">
             All-Purpose Apps
@@ -176,7 +174,7 @@ export default function Home() {
           <div className="hero-brand">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src={`${assetBasePath}/brand/all-purpose-apps-seal.svg`}
+              src="/brand/all-purpose-apps-seal.svg"
               alt="All-Purpose Apps — build, launch, grow; ideas into apps"
             />
           </div>
@@ -224,7 +222,7 @@ export default function Home() {
           </div>
           <div className="case-visual boothline-visual">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={`${assetBasePath}/projects/boothline-dashboard.png`} alt="Boothline event dashboard showing event and request activity" />
+            <img src="/projects/boothline-dashboard.png" alt="Boothline event dashboard showing event and request activity" />
             <span>Host workspace</span>
           </div>
         </article>
@@ -232,7 +230,7 @@ export default function Home() {
         <article className="case-study camera-case">
           <div className="case-visual camera-visual">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={`${assetBasePath}/projects/event-camera-icon.png`} alt="Gatherroll application icon" width={1024} height={1024} />
+            <img src="/projects/event-camera-icon.png" alt="Gatherroll application icon" width={1024} height={1024} />
             <div className="visual-note">
               <Smartphone aria-hidden="true" />
               <span>Designed around the phone already in every guest&apos;s hand</span>
@@ -379,7 +377,7 @@ export default function Home() {
         <a className="wordmark footer-mark" href="#top" aria-label="All-Purpose Apps, back to top">
           <span className="wordmark-symbol" aria-hidden="true">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={`${assetBasePath}/brand/all-purpose-apps-mark.png`} alt="" />
+            <img src="/brand/all-purpose-apps-mark.png" alt="" />
           </span>
         </a>
         <p>All-Purpose Apps<br />By Joshua Perez Leduc</p>

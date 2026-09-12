@@ -2,7 +2,7 @@
 
 ## Shape
 
-This is a single-route, presentation-only company portfolio for All-Purpose Apps, built with React on the Vinext/Next foundation. It has no database, authentication, analytics, contact-form backend, or runtime secrets.
+This is a single-route, presentation-only company portfolio for All-Purpose Apps, built with React and Next.js. It has no database, authentication, analytics, contact-form backend, or runtime secrets.
 
 The page is intentionally server-renderable. Project content lives beside its markup in `app/page.tsx`; there is no client state because the experience is reading and anchor navigation. `app/globals.css` owns theme tokens, layout, interaction states, responsive behavior, and reduced-motion handling.
 
@@ -21,9 +21,8 @@ Maturity labels separate working tools from concepts and prototypes. The concise
 
 ## Deployment
 
-The repository supports two explicit build targets:
+The repository uses the standard Next.js lifecycle: `next dev`, `next build`, and `next start`. Vercel detects that framework directly, creates an isolated deployment for every pull request, and promotes the `main` deployment to production. There is no custom output directory, repository base path, or parallel runtime adapter.
 
-1. `npm run build` keeps the existing OpenAI Sites/Vinext path for a Cloudflare-compatible runtime. `.openai/hosting.json` stores only the Sites project association and optional platform bindings.
-2. `npm run build:pages` uses Next.js static export for GitHub Pages. By default, the workflow supplies the repository name and `next.config.ts` converts it into the `/joshua-perez-leduc-portfolio` base path used by framework and public assets. When the repository variable `PAGES_CUSTOM_DOMAIN` is exactly `true`, the same export uses an empty base path for `allpurposeapps.com`.
+The move from GitHub Pages is deliberate. Pages could publish the existing static presentation but could not run the server-side contact handler planned for the next feature. Native Next.js hosting keeps page rendering and future route handlers in one application without exposing delivery credentials to the browser.
 
-The repository variable is a deployment switch rather than application state: it keeps ordinary pushes compatible with the current `github.io` URL until the DNS cutover, then makes future pushes target the custom-domain root. Reverting it to `false` restores the repository-path build without changing source. The Pages output is static by design. There are no runtime bindings, server routes, authentication checks, or form handlers to reproduce. If one of those is added later, Pages compatibility must be reconsidered rather than assuming the static export still represents the full application.
+Squarespace remains the domain registrar and DNS manager. Only web-routing records change during the cutover; MX and TXT records for `info@allpurposeapps.com` must remain intact. The last Pages deployment is the rollback target until the Vercel production domain has been verified and Pages is disabled.

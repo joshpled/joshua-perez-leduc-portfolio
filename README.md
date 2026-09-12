@@ -15,42 +15,26 @@ npm run dev
 
 The development server prints the local URL. Use `npm run build` to create the production bundle.
 
-## Deploy to GitHub Pages
+## Deploy to Vercel
 
-GitHub Pages uses `.github/workflows/deploy-pages.yml`. A push to `main` installs the locked dependencies, runs the dedicated static export with `npm run build:pages`, and deploys the generated `out/` directory.
+Vercel runs the site as a native Next.js application. Import `joshpled/joshua-perez-leduc-portfolio`, keep the detected framework preset as **Next.js**, and use the repository defaults:
 
-The Pages build supports two URL shapes:
+- Install command: `npm ci`
+- Build command: `npm run build`
+- Output directory: leave unset so Vercel uses Next.js output
+- Node.js: 22.x
 
-- With the repository variable `PAGES_CUSTOM_DOMAIN` unset or set to anything except `true`, the build uses `/joshua-perez-leduc-portfolio` and remains available at `https://joshpled.github.io/joshua-perez-leduc-portfolio/`.
-- With `PAGES_CUSTOM_DOMAIN=true`, the build uses the domain root for `https://allpurposeapps.com/`.
-
-Keeping the switch in a repository variable lets the custom-domain cutover and rollback happen without another code change. Local development and the existing Sites build always use the domain root.
-
-To reproduce the Pages build locally:
-
-```bash
-GITHUB_PAGES=true GITHUB_REPOSITORY=joshpled/joshua-perez-leduc-portfolio npm run build:pages
-```
-
-To reproduce the custom-domain build locally:
-
-```bash
-GITHUB_PAGES=true PAGES_CUSTOM_DOMAIN=true npm run build:pages
-```
+Every pull request receives an isolated preview deployment. Merges to `main` publish to production automatically after the project is connected.
 
 ### Custom-domain cutover
 
-1. Verify `allpurposeapps.com` in the GitHub account Pages settings using GitHub's TXT record.
-2. In the repository Pages settings, set `allpurposeapps.com` as the custom domain.
-3. In Squarespace DNS, point the root domain to GitHub Pages with four `A` records: `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, and `185.199.111.153`.
-4. Point `www` to `joshpled.github.io` with a `CNAME` record. Preserve unrelated TXT and email records.
-5. Set the repository Actions variable `PAGES_CUSTOM_DOMAIN` to `true`, then run the Pages workflow.
-6. After GitHub provisions the certificate, enable **Enforce HTTPS**.
-7. In Squarespace, permanently forward the `.app`, `.net`, `.org`, and `allpurpose.app` domains to `https://allpurposeapps.com`.
+1. Add `allpurposeapps.com` and `www.allpurposeapps.com` to the Vercel project.
+2. Copy the DNS records Vercel provides into Squarespace DNS. Preserve all MX and TXT records used by `info@allpurposeapps.com`.
+3. Confirm the Vercel deployment works over HTTPS on both hostnames before changing the primary domain.
+4. Make `allpurposeapps.com` the primary production domain and redirect `www` to it.
+5. After the Vercel site is verified, disable GitHub Pages in the repository settings. Existing secondary-domain forwards can continue targeting `https://allpurposeapps.com`.
 
-For rollback, remove the custom domain in the repository Pages settings, set `PAGES_CUSTOM_DOMAIN` to `false`, and rerun the Pages workflow. The original `github.io` project URL will work again.
-
-The portfolio is presentation-only, so static hosting is sufficient. Adding server routes, runtime authentication, or a contact backend would require a different hosting decision.
+For rollback, restore the previous Squarespace web records while leaving mail records untouched. The last GitHub Pages deployment remains available until Pages is explicitly disabled.
 
 ## Content
 
@@ -69,7 +53,7 @@ Each line has one primary placement so the brand remains memorable without becom
 
 ## Contact details
 
-The public email and profile links are intentionally left as a visible placeholder until the owner chooses which details to publish. Replace the `contact-placeholder` block in `app/page.tsx` when those details are available.
+The current contact block is presentation-only. A dedicated contact page and server-side email delivery are planned as the first feature after the Vercel migration.
 
 ## Selected projects
 
