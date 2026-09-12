@@ -62,7 +62,7 @@ nav > a:not(.nav-cta):hover, nav > a:not(.nav-cta):focus-visible { color: var(--
 .nav-cta svg { width: 16px; height: 16px; }
 
 .hero {
-  min-height: calc(100vh - 84px); padding: clamp(70px, 9vw, 128px) clamp(24px, 5vw, 80px) 0;
+  min-height: calc(100vh - 84px); padding: clamp(24px, 3.5vw, 52px) clamp(24px, 5vw, 80px) 0;
   display: flex; flex-direction: column;
   background-color: var(--flour-white);
   background-image:
@@ -70,6 +70,8 @@ nav > a:not(.nav-cta):hover, nav > a:not(.nav-cta):focus-visible { color: var(--
     linear-gradient(90deg, transparent 0 49.9%, rgba(11,48,41,.03) 50%, transparent 50.1%);
   background-size: 18px 18px, 100% 100%;
 }
+.brand-masthead { display: flex; justify-content: center; margin-bottom: clamp(46px, 6vw, 78px); }
+.brand-masthead img { display: block; width: min(100%, 440px); height: auto; }
 .eyebrow, .section-label { margin: 0; color: #65736c; font-size: .72rem; line-height: 1.3; font-weight: 720; letter-spacing: .1em; text-transform: uppercase; }
 .eyebrow span, .section-label span { display: inline-block; width: 7px; height: 7px; margin-right: 10px; background: var(--orange); border-radius: 50%; }
 .hero-main { display: grid; grid-template-columns: minmax(0, 1.65fr) minmax(290px, .55fr); gap: clamp(54px, 9vw, 140px); align-items: end; }
@@ -84,8 +86,11 @@ nav > a:not(.nav-cta):hover, nav > a:not(.nav-cta):focus-visible { color: var(--
 .text-link:hover, .text-link:focus-visible { color: var(--orange); outline: none; }
 .hero-profile { padding: 26px; border: 1px solid #d7d8ce; border-radius: 16px; background: rgba(255,253,247,.9); box-shadow: 0 22px 60px rgba(11,48,41,.09); }
 .hero-profile > p { margin: 0; color: #6f7d76; font-size: .67rem; font-weight: 720; letter-spacing: .09em; text-transform: uppercase; }
-.profile-seal { width: min(100%, 390px); margin: 14px auto 22px; }
-.profile-seal img { display: block; width: 100%; height: auto; filter: drop-shadow(0 14px 28px rgba(11,48,41,.08)); }
+.profile-monogram { position: relative; height: 155px; display: grid; place-items: center; margin: 20px 0; overflow: hidden; border: 1px solid rgba(11,48,41,.08); border-radius: 12px; background: linear-gradient(145deg, #fffaf0, #f1e7d8); }
+.profile-monogram::before { content: ""; position: absolute; width: 112px; height: 112px; border: 1px solid rgba(11,48,41,.15); border-radius: 50%; box-shadow: 0 0 0 12px rgba(11,48,41,.035), 0 0 0 30px rgba(11,48,41,.02); }
+.profile-monogram::after { content: "01 / CUSTOM"; position: absolute; right: 13px; bottom: 11px; color: rgba(11,48,41,.52); font: 600 .54rem/1 var(--font-mono); letter-spacing: .08em; }
+/* The visible mark sits 7.5% below its PNG canvas midpoint, so anchor the canvas and compensate optically. */
+.profile-monogram img { position: absolute; left: 50%; top: 50%; z-index: 1; width: min(60%, 190px); height: auto; transform: translate(-50%, -57.5%); filter: drop-shadow(0 12px 24px rgba(11,48,41,.11)); }
 .hero-profile dl { margin: 0; }
 .hero-profile dl div { padding: 13px 0; border-top: 1px solid #dde3ec; }
 .hero-profile dt { color: #7b879b; font-size: .66rem; font-weight: 680; text-transform: uppercase; letter-spacing: .06em; }
@@ -200,6 +205,7 @@ footer > a:last-child svg { width: 17px; transform: rotate(180deg); }
   .hero-main { grid-template-columns: 1fr; align-items: start; }
   .hero-profile { max-width: 560px; display: grid; grid-template-columns: 1fr 1.3fr; gap: 0 24px; }
   .hero-profile > p { grid-column: 1 / 3; }
+  .profile-monogram { height: 170px; }
   .hero-profile dl { align-self: center; }
   .case-study, .camera-case { grid-template-columns: 1fr; }
   .featured-case .case-visual { order: -1; }
@@ -224,6 +230,7 @@ footer > a:last-child svg { width: 17px; transform: rotate(180deg); }
   .hero-actions { align-items: flex-start; flex-direction: column; gap: 20px; }
   .hero-profile { grid-template-columns: 1fr; max-width: none; }
   .hero-profile > p { grid-column: 1; }
+  .profile-monogram { height: 135px; }
   .credibility-rail { grid-template-columns: 1fr; margin-top: 70px; }
   .credibility-rail span { border-bottom: 1px solid var(--line); }
   .section-header { grid-template-columns: 1fr; gap: 26px; }
