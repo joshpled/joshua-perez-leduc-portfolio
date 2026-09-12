@@ -150,13 +150,6 @@ export default function Home() {
       </header>
 
       <section className="hero" id="top">
-        <div className="brand-masthead">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={`${assetBasePath}/brand/all-purpose-apps-seal.svg`}
-            alt="All-Purpose Apps brand seal"
-          />
-        </div>
         <div className="hero-main">
           <div className="hero-content">
             <p className="eyebrow">
@@ -180,27 +173,13 @@ export default function Home() {
             </div>
           </div>
 
-          <aside className="hero-profile">
-            <p>Independent software company</p>
-            <div className="profile-monogram" aria-hidden="true">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={`${assetBasePath}/brand/all-purpose-apps-mark.png`} alt="" />
-            </div>
-            <dl>
-              <div>
-                <dt>Focus</dt>
-                <dd>Custom software and original products</dd>
-              </div>
-              <div>
-                <dt>Capabilities</dt>
-                <dd>Websites, apps, mobile, and desktop</dd>
-              </div>
-              <div>
-                <dt>Engagement</dt>
-                <dd>Focused builds and technical partnerships</dd>
-              </div>
-            </dl>
-          </aside>
+          <div className="hero-brand">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={`${assetBasePath}/brand/all-purpose-apps-seal.svg`}
+              alt="All-Purpose Apps — build, launch, grow; ideas into apps"
+            />
+          </div>
         </div>
 
         <div className="credibility-rail" aria-label="Portfolio highlights">
