@@ -4,7 +4,7 @@
 
 This is a single-route, presentation-only company portfolio for All-Purpose Apps, built with React and Next.js. It has no database, authentication, analytics, contact-form backend, or runtime secrets.
 
-The page is intentionally server-renderable. Project content lives beside its markup in `app/page.tsx`; there is no client state because the experience is reading and anchor navigation. `app/globals.css` owns theme tokens, layout, interaction states, responsive behavior, and reduced-motion handling.
+The page is intentionally server-renderable. Project content lives beside its markup in `app/page.tsx` and is passed as children to the small client wrapper in `app/project-gallery.tsx`. Only gallery navigation uses client state. `app/globals.css` owns theme tokens, layout, interaction states, responsive behavior, and reduced-motion handling.
 
 ## Visual system
 
@@ -19,13 +19,17 @@ The root metadata publishes the official favicon family, Apple touch icon, web m
 The portfolio has two levels of evidence:
 
 1. Two expanded case studies for Boothline and Gatherroll, both supported by project-owned imagery and challenge/solution context.
-2. Five compact evidence cards for Wedding Dashboard, Builtproof, Lanes, When, and Noir. A two-column grid gives their descriptions and evidence comfortable line lengths, then collapses to one column on phones. The final card occupies one column; cards grow naturally with their content rather than having a fixed minimum height.
+2. Five supporting panels for Wedding Dashboard, Builtproof, Lanes, When, and Noir, each retaining its description, proof points, stack, and status. Their existing category icons provide a decorative illustration rather than implying a product screenshot.
+
+All seven panels form one swipeable gallery with a counter, Previous/Next controls, and named project shortcuts. Desktop pairs evidence and imagery; mobile stacks them. Native horizontal scrolling and CSS scroll snapping handle touch and trackpads. The nearest panel to the scroll position drives the React selection state so swipes and buttons share one source of truth. Keyboard controls operate only when the track itself is focused.
+
+A ResizeObserver fits the track to the selected panel after content or viewport changes. A hydration snapshot delays offscreen accessibility hiding until the controls are available; inactive panels then use `aria-hidden` and `inert`. The short status announcement reports project name and position without re-announcing its entire text. No autoplay or wraparound occurs. Print restores all panels to a vertical list. See `docs/adr-009-project-gallery.md`.
 
 Maturity labels separate working tools from concepts and prototypes. The concise technology summary reflects the selected projects' actual web, cloud, iOS, and cross-platform stacks without implying unverified outcomes.
 
 The first readability stage places each maturity label directly under its project title and keeps all evidence expanded. Repeated introductory copy and decorative vertical gaps are reduced; no capability or technology list is removed. Featured project text precedes its image in document and mobile reading order, while desktop pairs them side by side. Images retain their proportions rather than filling tall cropped panels.
 
-Mobile navigation keeps the existing anchor links visible in a second row. Section scroll margins account for the sticky header, and links have visible keyboard focus. The approved hero badge remains above the mobile headline at a smaller display size. These changes use HTML and CSS only; disclosure interactions remain a separate follow-up. See `docs/adr-008-portfolio-readability.md` for the rationale and boundaries.
+Mobile navigation keeps the existing anchor links visible in a second row. Section scroll margins account for the sticky header, and links have visible keyboard focus. The approved hero badge remains above the mobile headline at a smaller display size. The gallery supersedes the previously proposed disclosure follow-up; every selected project's details remain expanded. See `docs/adr-008-portfolio-readability.md` for the earlier rationale and boundaries.
 
 ## Deployment
 
