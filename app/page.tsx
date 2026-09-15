@@ -21,19 +21,16 @@ const services = [
   {
     icon: Layers3,
     title: "Websites & web apps",
-    text: "Create a sharp public presence or a capable browser-based product, built around what your customers and team actually need.",
     details: ["Marketing and company websites", "Dashboards and web applications", "Platforms and integrations"],
   },
   {
     icon: Smartphone,
     title: "Mobile & desktop apps",
-    text: "Build thoughtful native or cross-platform software that feels at home on the devices where people use it.",
     details: ["iOS and Android products", "Desktop experiences", "Shared cross-platform systems"],
   },
   {
     icon: Sparkles,
     title: "Original products",
-    text: "Shape an ambitious idea into focused software—from the first useful version to a product ready to grow.",
     details: ["Product definition", "Prototypes and internal tools", "Full-cycle engineering"],
   },
 ];
@@ -117,10 +114,10 @@ const supportingProjects = [
 ];
 
 const deliveryProcess = [
-  ["01", "Frame", "Clarify the outcome, audience, constraints, and riskiest assumptions before implementation starts."],
-  ["02", "Shape", "Translate the problem into a focused product flow and a technical plan you can understand."],
-  ["03", "Build", "Deliver working software in reviewable slices, with decisions and tradeoffs made visible."],
-  ["04", "Verify", "Test the important paths, document the system, and hand over a product you can maintain."],
+  ["01", "Frame", "Agree on the outcome, audience, constraints, and risks."],
+  ["02", "Shape", "Define the product flow and a clear technical plan."],
+  ["03", "Build", "Review working software in small steps, with tradeoffs explained."],
+  ["04", "Verify", "Test key paths, document the system, and hand it over."],
 ];
 
 export default function Home() {
@@ -153,9 +150,8 @@ export default function Home() {
               Your ideas.{" "}<em>Made from scratch.</em>
             </h1>
             <p className="hero-copy">
-              I&apos;m Josh, the developer behind All-Purpose Apps. I build websites, web apps,
-              mobile apps, desktop apps, and original products for people ready to make
-              something useful, ambitious, or entirely new.
+              I&apos;m Josh, the developer behind All-Purpose Apps.
+              I build custom software for businesses and big ideas.
             </p>
             <div className="hero-actions">
               <a className="primary-link" href="#work">
@@ -190,8 +186,7 @@ export default function Home() {
             <h2>Products shaped around real needs.</h2>
           </div>
           <p>
-            A selection of product, platform, and applied-engineering work. Each case study
-            is grounded in verified functionality rather than invented business metrics.
+            Seven products across web, mobile, and cloud—with capabilities and build stages shown.
           </p>
         </div>
 
@@ -200,9 +195,9 @@ export default function Home() {
             <div className="case-meta"><span>01</span><span>Featured product</span></div>
             <p className="case-type">Event platform · Product engineering</p>
             <h3>Boothline</h3>
+            <p className="case-status">Interactive product concept · Production path documented</p>
             <p className="case-summary">
-              A reusable song-request platform that gives hosts a polished event workspace
-              and guests a quick, mobile-first way to discover and request music.
+              A reusable song-request platform with a host workspace and mobile-first guest pages.
             </p>
             <div className="case-scope">
               <div><span>Challenge</span><p>Make live song requests easy for guests and manageable for hosts across different event types.</p></div>
@@ -214,7 +209,6 @@ export default function Home() {
               <li><Check />Timezone-aware scheduling and reusable event themes</li>
             </ul>
             <p className="case-stack">React · TypeScript · Product design · Responsive web</p>
-            <p className="case-status">Interactive product concept · Production path documented</p>
           </div>
           <div className="case-visual boothline-visual">
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -224,22 +218,13 @@ export default function Home() {
         </article>
 
         <article className="case-study camera-case">
-          <div className="case-visual camera-visual">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/projects/event-camera-icon.png" alt="Gatherroll application icon" width={1024} height={1024} />
-            <div className="visual-note">
-              <Smartphone aria-hidden="true" />
-              <span>Designed around the phone already in every guest&apos;s hand</span>
-            </div>
-          </div>
           <div className="case-copy">
             <div className="case-meta"><span>02</span><span>Event utility</span></div>
             <p className="case-type">Guest photography · Mobile cloud application</p>
             <h3>Gatherroll</h3>
+            <p className="case-status">Private event application · Built for mobile browsers</p>
             <p className="case-summary">
-              A private, disposable-camera-style experience that lets wedding guests capture
-              candid moments without installing an app, while organizers retain event controls
-              and direct cloud delivery.
+              A private, disposable-camera-style experience for wedding guests, with event controls and direct cloud delivery.
             </p>
             <div className="case-scope">
               <div><span>Challenge</span><p>Collect candid guest photos without requiring an app-store download or a complicated upload flow.</p></div>
@@ -251,7 +236,14 @@ export default function Home() {
               <li><Check />Installable experience with offline fallback</li>
             </ul>
             <p className="case-stack">React · OAuth · Cloudflare · Google Drive</p>
-            <p className="case-status">Private event application · Built for mobile browsers</p>
+          </div>
+          <div className="case-visual camera-visual">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/projects/event-camera-icon.png" alt="Gatherroll application icon" width={1024} height={1024} />
+            <div className="visual-note">
+              <Smartphone aria-hidden="true" />
+              <span>Designed around the phone already in every guest&apos;s hand</span>
+            </div>
           </div>
         </article>
 
@@ -264,12 +256,12 @@ export default function Home() {
               </div>
               <p className="case-type">{type}</p>
               <h3>{name}</h3>
+              <p className="project-status">{status}</p>
               <p className="project-description">{description}</p>
               <ul>
                 {proof.map((item) => <li key={item}>{item}</li>)}
               </ul>
               <p className="case-stack">{stack}</p>
-              <p className="project-status">{status}</p>
             </article>
           ))}
         </div>
@@ -282,17 +274,15 @@ export default function Home() {
             <h2>One versatile partner. Whatever the platform.</h2>
           </div>
           <p>
-            Bring me the goal, the rough sketch, or the stubborn problem. I&apos;ll help choose
-            the right shape for it and turn it into software people can rely on.
+            Bring the goal or rough sketch. I&apos;ll help choose the platform and build it.
           </p>
         </div>
         <div className="service-grid">
-          {services.map(({ icon: Icon, title, text, details }, index) => (
+          {services.map(({ icon: Icon, title, details }, index) => (
             <article key={title}>
               <div className="service-icon"><Icon aria-hidden="true" /></div>
               <span className="service-number">0{index + 1}</span>
               <h3>{title}</h3>
-              <p>{text}</p>
               <ul>{details.map((detail) => <li key={detail}><Check />{detail}</li>)}</ul>
             </article>
           ))}
@@ -304,8 +294,7 @@ export default function Home() {
           <p className="section-label light">How it gets made</p>
           <h2>Built carefully, from the first measure.</h2>
           <p>
-            You should always understand what is being built, why a decision was made, and
-            what comes next. The process is structured to keep progress visible.
+            Understand what&apos;s being built, why it matters, and what comes next.
           </p>
         </div>
         <ol className="process-list">
@@ -326,15 +315,11 @@ export default function Home() {
         </div>
         <div className="about-copy">
           <p className="about-lead">
-            All-Purpose Apps is my software development company, built to give businesses
-            and big ideas one dependable path from possibility to working product.
+            I&apos;m Joshua Perez Leduc. At All-Purpose Apps, you work directly with the developer building your product.
           </p>
           <p>
-            The name borrows the spirit of all-purpose flour: a versatile foundation that
-            adapts to the job at hand. For me, that can mean a focused website, a business
-            web app, a native mobile experience, a desktop tool, or an original product.
-            The technology changes; my standard stays the same—clear decisions, dependable
-            behavior, and work you can understand.
+            Like all-purpose flour, the company adapts to the job at hand.
+            The standard stays the same: clear decisions, dependable behavior, and work you can understand.
           </p>
           <div className="principles">
             <div><LockKeyhole /><span><strong>Risk made explicit</strong>Security and data tradeoffs are documented and matched to the product stage.</span></div>
@@ -358,8 +343,7 @@ export default function Home() {
         </div>
         <div className="contact-bottom">
           <p>
-            Tell me what you&apos;re building, improving, or trying to untangle. I&apos;ll bring the
-            range to find the clearest route forward—and the care to build it well.
+            Tell me what you want to build or improve. Let&apos;s find the clearest way forward.
           </p>
           <div className="contact-placeholder" aria-label="Contact details pending">
             <span>Public contact details</span>

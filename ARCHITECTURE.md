@@ -19,9 +19,13 @@ The root metadata publishes the official favicon family, Apple touch icon, web m
 The portfolio has two levels of evidence:
 
 1. Two expanded case studies for Boothline and Gatherroll, both supported by project-owned imagery and challenge/solution context.
-2. Five compact evidence cards for Wedding Dashboard, Builtproof, Lanes, When, and Noir. The six-column grid creates a balanced two-card row followed by a three-card row on desktop, then collapses to one column for narrower screens.
+2. Five compact evidence cards for Wedding Dashboard, Builtproof, Lanes, When, and Noir. A two-column grid gives their descriptions and evidence comfortable line lengths, then collapses to one column on phones. The final card occupies one column; cards grow naturally with their content rather than having a fixed minimum height.
 
 Maturity labels separate working tools from concepts and prototypes. The concise technology summary reflects the selected projects' actual web, cloud, iOS, and cross-platform stacks without implying unverified outcomes.
+
+The first readability stage places each maturity label directly under its project title and keeps all evidence expanded. Repeated introductory copy and decorative vertical gaps are reduced; no capability or technology list is removed. Featured project text precedes its image in document and mobile reading order, while desktop pairs them side by side. Images retain their proportions rather than filling tall cropped panels.
+
+Mobile navigation keeps the existing anchor links visible in a second row. Section scroll margins account for the sticky header, and links have visible keyboard focus. The approved hero badge remains above the mobile headline at a smaller display size. These changes use HTML and CSS only; disclosure interactions remain a separate follow-up. See `docs/adr-008-portfolio-readability.md` for the rationale and boundaries.
 
 ## Deployment
 
