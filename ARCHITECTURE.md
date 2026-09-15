@@ -2,9 +2,9 @@
 
 ## Shape
 
-This is a single-route, presentation-only company portfolio for All-Purpose Apps, built with React and Next.js. It has no database, authentication, analytics, contact-form backend, or runtime secrets.
+This is an All-Purpose Apps portfolio with a home page, a dedicated contact page, and a server-side contact endpoint, built with React and Next.js. There is no database, account authentication, or analytics. Contact delivery uses private provider credentials in Vercel.
 
-The page is intentionally server-renderable. Project content lives beside its markup in `app/page.tsx` and is passed as children to the small client wrapper in `app/project-gallery.tsx`. Only gallery navigation uses client state. `app/globals.css` owns theme tokens, layout, interaction states, responsive behavior, and reduced-motion handling.
+The page is intentionally server-renderable. Project content lives beside its markup in `app/page.tsx` and is passed as children to the small client wrapper in `app/project-gallery.tsx`. Gallery navigation and the contact form use client state. `app/globals.css` owns theme tokens, layout, interaction states, responsive behavior, and reduced-motion handling.
 
 ## Visual system
 
@@ -35,6 +35,14 @@ Mobile navigation keeps the existing anchor links visible in a second row. Secti
 
 The repository uses the standard Next.js lifecycle: `next dev`, `next build`, and `next start`. Vercel detects that framework directly, creates an isolated deployment for every pull request, and promotes the `main` deployment to production. There is no custom output directory, repository base path, or parallel runtime adapter.
 
-The move from GitHub Pages is deliberate. Pages could publish the existing static presentation but could not run the server-side contact handler planned for the next feature. Native Next.js hosting keeps page rendering and future route handlers in one application without exposing delivery credentials to the browser.
+The move from GitHub Pages is deliberate. Pages could publish the existing static presentation but could not run the server-side contact handler planned for the next feature. Native Next.js hosting keeps page rendering and route handlers in one application without exposing delivery credentials to the browser.
 
 Squarespace remains the domain registrar and DNS manager. Only web-routing records change during the cutover; MX and TXT records for `info@allpurposeapps.com` must remain intact. The last Pages deployment is the rollback target until the Vercel production domain has been verified and Pages is disabled.
+
+## Contact delivery
+
+`app/contact/page.tsx` renders the page at request time and checks environment readiness. It passes only the public Turnstile site key to `app/contact/contact-form.tsx`. The client manages form submission, verification renewal, retry state, focus feedback, and duplicate-click prevention. Missing configuration renders the direct email fallback.
+
+`app/api/contact/route.ts` is the Node runtime boundary. `lib/contact.ts` bounds the request body, validates fields with existing Zod, enforces an exact origin allowlist, checks the honeypot, verifies Turnstile's success/action/hostname, then sends plain text through Resend to the fixed owner inbox. Visitor email is Reply-To only. A UUID/content hash provides provider idempotency for unchanged retries. No provider credentials or inquiry payloads are logged.
+
+The page reports provider acceptance, not final inbox delivery. Message values remain in the mounted form on failure; there is no persistent draft or database backup. Provider and mailbox retention apply. `tests/contact.test.mjs` injects fake provider responses to exercise delivery decisions without sending mail. ADR 010 explains the tradeoffs; `docs/contact-setup.md` documents deployment setup and real-mail acceptance checks.
