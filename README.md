@@ -63,15 +63,21 @@ The current contact block is presentation-only. A dedicated contact page and ser
 
 ## Selected projects
 
-The portfolio presents seven owner-selected products: Boothline, Gatherroll, Wedding Dashboard, Builtproof, Lanes, When, and Noir. Boothline and Gatherroll receive expanded case studies; the remaining five use compact evidence cards so the page stays scannable.
+The portfolio presents seven owner-selected products in a swipeable gallery: Boothline, Gatherroll, Wedding Dashboard, Builtproof, Lanes, When, and Noir. Boothline and Gatherroll include expanded case-study context; the other five retain their descriptions and evidence in matching gallery panels.
 
 ### Keeping the page readable
 
-Introduce each project once, then use concrete capabilities as evidence. Keep its full maturity label directly beneath its title: a prototype or planned integration must remain clear before the visitor reads the implementation details. All project evidence, challenge/solution context, and stacks remain expanded in this first readability stage.
+Introduce each project once, then use concrete capabilities as evidence. Keep its full maturity label directly beneath its title: a prototype or planned integration must remain clear before the visitor reads the implementation details. All project evidence, challenge/solution context, and stacks remain expanded within each gallery panel.
 
 Services use their category headings and example lists without a repeated marketing paragraph. Keep the full platform range there and in the technology summary rather than repeating it in the hero and About section. On mobile, Work, Services, and About remain visible beneath the contact action, and the hero badge stays above the headline at a smaller display size.
 
-For layout changes, check 320px, 390px, 768px, and 1280px widths, keyboard focus, anchor destinations below the sticky header, and image proportions. Update `docs/adr-008-portfolio-readability.md` if the content hierarchy changes. Expandable project details are a separate follow-up; this stage adds no client state or dependencies.
+For layout changes, check 320px, 390px, 768px, and 1280px widths, keyboard focus, anchor destinations below the sticky header, and image proportions. ADR 008 records the initial readability work; ADR 009 records the gallery that replaces the proposed expandable-detail follow-up.
+
+### Project gallery
+
+`app/project-gallery.tsx` adds a small client wrapper around server-rendered project panels from `app/page.tsx`. Swipe horizontally, use Previous/Next, or choose a project by name. With the panel focused, Left/Right browse and Home/End jump to the ends. Navigation never wraps or starts automatically. Reduced-motion preferences disable smooth navigation.
+
+Keep the `names` list and children in the same order. If adding a project, update both. The gallery fits its selected panel's natural height, including after fonts/images load or the viewport changes. Native scroll snapping remains available before JavaScript loads; controls appear after hydration. Print shows every project. Verify that one panel is exposed to assistive technology after hydration, the counter follows swiping, and inactive panels cannot receive keyboard focus.
 
 ## Project claims
 

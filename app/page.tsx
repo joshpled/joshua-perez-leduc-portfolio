@@ -1,3 +1,4 @@
+import ProjectGallery from "./project-gallery";
 import {
   ArrowDownRight,
   ArrowRight,
@@ -190,81 +191,85 @@ export default function Home() {
           </p>
         </div>
 
-        <article className="case-study featured-case">
-          <div className="case-copy">
-            <div className="case-meta"><span>01</span><span>Featured product</span></div>
-            <p className="case-type">Event platform · Product engineering</p>
-            <h3>Boothline</h3>
-            <p className="case-status">Interactive product concept · Production path documented</p>
-            <p className="case-summary">
-              A reusable song-request platform with a host workspace and mobile-first guest pages.
-            </p>
-            <div className="case-scope">
-              <div><span>Challenge</span><p>Make live song requests easy for guests and manageable for hosts across different event types.</p></div>
-              <div><span>Solution</span><p>One product system for event creation, branded guest pages, QR sharing, search, and live queue operations.</p></div>
-            </div>
-            <ul className="proof-list">
-              <li><Check />Fuzzy matching across a 10,000-song catalog</li>
-              <li><Check />Cross-tab synchronization with guarded request rules</li>
-              <li><Check />Timezone-aware scheduling and reusable event themes</li>
-            </ul>
-            <p className="case-stack">React · TypeScript · Product design · Responsive web</p>
-          </div>
-          <div className="case-visual boothline-visual">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/projects/boothline-dashboard.png" alt="Boothline event dashboard showing event and request activity" />
-            <span>Host workspace</span>
-          </div>
-        </article>
-
-        <article className="case-study camera-case">
-          <div className="case-copy">
-            <div className="case-meta"><span>02</span><span>Event utility</span></div>
-            <p className="case-type">Guest photography · Mobile cloud application</p>
-            <h3>Gatherroll</h3>
-            <p className="case-status">Private event application · Built for mobile browsers</p>
-            <p className="case-summary">
-              A private, disposable-camera-style experience for wedding guests, with event controls and direct cloud delivery.
-            </p>
-            <div className="case-scope">
-              <div><span>Challenge</span><p>Collect candid guest photos without requiring an app-store download or a complicated upload flow.</p></div>
-              <div><span>Solution</span><p>A mobile-first capture experience with photo limits, previews, private administration, and Google Drive delivery.</p></div>
-            </div>
-            <ul className="proof-list">
-              <li><Check />Google OAuth and Drive upload integration</li>
-              <li><Check />Secure sessions, password rotation, and D1 persistence</li>
-              <li><Check />Installable experience with offline fallback</li>
-            </ul>
-            <p className="case-stack">React · OAuth · Cloudflare · Google Drive</p>
-          </div>
-          <div className="case-visual camera-visual">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/projects/event-camera-icon.png" alt="Gatherroll application icon" width={1024} height={1024} />
-            <div className="visual-note">
-              <Smartphone aria-hidden="true" />
-              <span>Designed around the phone already in every guest&apos;s hand</span>
-            </div>
-          </div>
-        </article>
-
-        <div className="project-grid">
-          {supportingProjects.map(({ number, icon: Icon, name, type, description, proof, stack, status }) => (
-            <article className="project-card" key={name}>
-              <div className="project-top">
-                <span>{number}</span>
-                <Icon aria-hidden="true" />
+        <ProjectGallery names={["Boothline", "Gatherroll", ...supportingProjects.map(({ name }) => name)]}>
+          <article className="case-study featured-case">
+            <div className="case-copy">
+              <div className="case-meta"><span>01</span><span>Featured product</span></div>
+              <p className="case-type">Event platform · Product engineering</p>
+              <h3>Boothline</h3>
+              <p className="case-status">Interactive product concept · Production path documented</p>
+              <p className="case-summary">
+                A reusable song-request platform with a host workspace and mobile-first guest pages.
+              </p>
+              <div className="case-scope">
+                <div><span>Challenge</span><p>Make live song requests easy for guests and manageable for hosts across different event types.</p></div>
+                <div><span>Solution</span><p>One product system for event creation, branded guest pages, QR sharing, search, and live queue operations.</p></div>
               </div>
-              <p className="case-type">{type}</p>
-              <h3>{name}</h3>
-              <p className="project-status">{status}</p>
-              <p className="project-description">{description}</p>
-              <ul>
-                {proof.map((item) => <li key={item}>{item}</li>)}
+              <ul className="proof-list">
+                <li><Check />Fuzzy matching across a 10,000-song catalog</li>
+                <li><Check />Cross-tab synchronization with guarded request rules</li>
+                <li><Check />Timezone-aware scheduling and reusable event themes</li>
               </ul>
-              <p className="case-stack">{stack}</p>
+              <p className="case-stack">React · TypeScript · Product design · Responsive web</p>
+            </div>
+            <div className="case-visual boothline-visual">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/projects/boothline-dashboard.png" alt="Boothline event dashboard showing event and request activity" />
+              <span>Host workspace</span>
+            </div>
+          </article>
+
+          <article className="case-study camera-case">
+            <div className="case-copy">
+              <div className="case-meta"><span>02</span><span>Event utility</span></div>
+              <p className="case-type">Guest photography · Mobile cloud application</p>
+              <h3>Gatherroll</h3>
+              <p className="case-status">Private event application · Built for mobile browsers</p>
+              <p className="case-summary">
+                A private, disposable-camera-style experience for wedding guests, with event controls and direct cloud delivery.
+              </p>
+              <div className="case-scope">
+                <div><span>Challenge</span><p>Collect candid guest photos without requiring an app-store download or a complicated upload flow.</p></div>
+                <div><span>Solution</span><p>A mobile-first capture experience with photo limits, previews, private administration, and Google Drive delivery.</p></div>
+              </div>
+              <ul className="proof-list">
+                <li><Check />Google OAuth and Drive upload integration</li>
+                <li><Check />Secure sessions, password rotation, and D1 persistence</li>
+                <li><Check />Installable experience with offline fallback</li>
+              </ul>
+              <p className="case-stack">React · OAuth · Cloudflare · Google Drive</p>
+            </div>
+            <div className="case-visual camera-visual">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/projects/event-camera-icon.png" alt="Gatherroll application icon" width={1024} height={1024} />
+              <div className="visual-note">
+                <Smartphone aria-hidden="true" />
+                <span>Designed around the phone already in every guest&apos;s hand</span>
+              </div>
+            </div>
+          </article>
+
+          {supportingProjects.map(({ number, icon: Icon, name, type, description, proof, stack, status }) => (
+            <article className="case-study supporting-case" key={name}>
+              <div className="case-copy">
+                <div className="case-meta"><span>{number}</span><span>Selected product</span></div>
+                <p className="case-type">{type}</p>
+                <h3>{name}</h3>
+                <p className="case-status">{status}</p>
+                <p className="case-summary">{description}</p>
+                <ul className="proof-list">
+                  {proof.map((item) => <li key={item}><Check aria-hidden="true" />{item}</li>)}
+                </ul>
+                <p className="case-stack">{stack}</p>
+              </div>
+              <div className="project-artwork" aria-hidden="true">
+                <span className="artwork-number">{number}</span>
+                <Icon />
+                <span className="artwork-name">{name}</span>
+              </div>
             </article>
           ))}
-        </div>
+        </ProjectGallery>
       </section>
 
       <section className="services-section" id="services">

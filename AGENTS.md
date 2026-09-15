@@ -11,6 +11,7 @@
 ## Structure
 
 - `app/page.tsx` — single-route portfolio content
+- `app/project-gallery.tsx` — client navigation wrapper for server-rendered project panels
 - `app/globals.css` — theme, layout, responsive behavior
 - `app/layout.tsx` — document metadata and shell
 - `next.config.ts` — native Next.js configuration used by Vercel
@@ -21,6 +22,7 @@
 
 ## Decisions log
 
+- 2026-09-15 — Present all seven projects in a swipeable gallery with named shortcuts — the owner chose sequential browsing to reduce page length while retaining full project evidence. See ADR 009. Gotchas: keep names/children aligned, derive selection from actual scrolling, observe active-panel height, preserve maturity labels, and verify offscreen panels are inert after hydration. This supersedes the proposed expandable-detail follow-up.
 - 2026-09-15 — Shorten repeated portfolio copy and decorative spacing while keeping all seven projects fully expanded — visitors can scan capabilities and maturity sooner, with mobile section links always visible. See `docs/adr-008-portfolio-readability.md`. Gotchas: keep status labels beneath titles, retain every proof point and stack, and review 320px layouts plus sticky-header anchor offsets; expandable details belong to the next PR after this stage merges.
 - 2026-09-15 — Replace the smooth geometric `A` with the owner-approved particle-dissolving brand system — official badge, horizontal, symbol, favicon, social, color, and typography assets now form one consistent identity across the website. Gotcha: the traced SVG lettering and particles are artwork, not editable text; do not retype, rearrange, recolor individual parts, or add effects.
 - 2026-09-12 — Move the commercial portfolio from GitHub Pages to Vercel Pro before adding contact delivery — native Next.js hosting supports a server-side form handler, deployment previews, and commercial use without maintaining a parallel adapter. Gotcha: preserve Squarespace MX and TXT records during the web DNS cutover so `info@allpurposeapps.com` continues working.

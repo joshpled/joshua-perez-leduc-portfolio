@@ -2,6 +2,8 @@
 
 Date: 2026-09-15
 
+Follow-up: ADR 009 supersedes the proposed expandable-detail stage with the owner-approved swipeable gallery. This ADR records the first readability stage.
+
 ## Context
 
 The portfolio repeats positioning in the hero, services, and company introduction. Large card gaps and image minimum heights make this especially slow to scan on phones. Project maturity appears after the technical details, and mobile navigation hides three useful section links.
