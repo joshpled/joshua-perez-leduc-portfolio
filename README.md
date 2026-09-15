@@ -59,7 +59,11 @@ Companion typography is hosted locally from the supplied kit: Barlow Condensed B
 
 ## Contact details
 
-The current contact block is presentation-only. A dedicated contact page and server-side email delivery are planned as the first feature after the Vercel migration.
+The `/contact` page sends inquiries to `info@allpurposeapps.com` through a server-side Resend request after Cloudflare Turnstile verification. The visitor’s address is Reply-To. A direct email link remains available if the form cannot send. No inquiry database or new dependency is required.
+
+Copy `.env.example` to `.env.local` for local setup. Required values: `RESEND_API_KEY`, `CONTACT_FROM_EMAIL`, `TURNSTILE_SITE_KEY`, and `TURNSTILE_SECRET_KEY`. `CONTACT_ALLOWED_ORIGINS` adds exact trusted local/preview origins. Secrets stay server-side; only the widget site key is public. See [contact setup](docs/contact-setup.md) for DNS, Vercel configuration, delivery verification, and troubleshooting.
+
+Run `npm test` for isolated delivery/abuse/failure tests (Node’s test runner with TypeScript stripping), `npx tsc --noEmit`, `npm run lint`, and `npm run build`. Tests mock providers and send no real mail. Live inbox and Reply-To verification must be completed separately before release.
 
 ## Selected projects
 
