@@ -2,7 +2,7 @@
 
 A responsive company portfolio for All-Purpose Apps, Joshua Perez Leduc's independent software development company. The company builds websites, web apps, mobile apps, desktop apps, and original software products.
 
-The visual direction is intentionally business-focused: deep forest green, warm cream, and a restrained burnt-orange accent frame clear service positioning, evidence-led case studies, and generous spacing. The supplied geometric `A` mark, fine grain, and measured linework nod to the all-purpose-flour reference without turning the company into a bakery brand.
+The visual direction is intentionally business-focused: the official forest, cream, and terracotta palette frames clear service positioning, evidence-led case studies, and generous spacing. The approved particle-dissolving `A`, fine grain, and measured linework suggest ideas taking shape without turning the company into a bakery brand.
 
 ## Run locally
 
@@ -40,7 +40,7 @@ For rollback, restore the previous Squarespace web records while leaving mail re
 
 - `app/page.tsx` contains the portfolio structure and project case studies.
 - `app/globals.css` contains the visual system and responsive layout.
-- `public/brand` contains the approved All-Purpose Apps mark, app icon, and outlined vector brand seal.
+- `public/brand` contains the approved badge, horizontal lockup, standalone symbol, web icons, social card, and locally hosted companion fonts.
 - `public/projects` contains project-owned imagery reused with the portfolio.
 
 ## Brand language
@@ -50,6 +50,12 @@ For rollback, restore the previous Squarespace web records while leaving mail re
 - Supporting tagline: “All-purpose skills. Built for your purpose.”
 
 Each line has one primary placement so the brand remains memorable without becoming repetitive.
+
+## Brand assets
+
+The website uses the September 15, 2026 professional brand kit supplied by the owner. Logo artwork remains in its official outlined SVG form: do not retype the logo, move its particles, recolor individual elements, or add effects. Use the horizontal lockup for wide navigation and footer placements, the badge for the hero, and the standalone symbol for compact placements.
+
+Companion typography is hosted locally from the supplied kit: Barlow Condensed Bold for display headings and Inter for body and interface copy. The font license files live beside the font files in `public/brand/fonts`.
 
 ## Contact details
 

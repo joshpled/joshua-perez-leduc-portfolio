@@ -8,7 +8,11 @@ The page is intentionally server-renderable. Project content lives beside its ma
 
 ## Visual system
 
-The visual thesis is a versatile independent software company: personal, enthusiastic, credible, and precise. Deep forest green establishes trust, warm cream surfaces reference the name's origin, and burnt orange identifies highlights and technical details. The supplied geometric `A` identity is used as imagery while the company name remains live HTML in navigation for accessibility, responsive clarity, and reliable spelling. The brand kit's traced, path-based badge is integrated beside the hero message on desktop and above it on smaller screens, preserving the approved lettering and proportions while keeping the opening composition cohesive and sharp at every screen density. Fine grain and measurement-like ticks provide subtle all-purpose-flour cues without using bakery imagery. Generous spacing and a consistent card system prioritize the work over decoration. Project imagery remains limited to verified, project-owned assets.
+The visual thesis is a versatile independent software company: personal, enthusiastic, credible, and precise. The approved forest (`#01291A`), warm cream (`#FEFBF3`), and terracotta (`#DE5726`) palette establishes a recognizable system while preserving the site's restrained business tone. The official identity centers on a particle-dissolving `A`: the horizontal lockup appears in wide navigation and footer placements, the standalone symbol appears in compact navigation, and the full badge anchors the hero. All logo lettering and particles remain outlined artwork rather than recreated HTML or CSS.
+
+Barlow Condensed Bold is the display face and Inter is the body/interface face. Both are served locally from the owner-supplied kit, avoiding a third-party font request and keeping the approved typography available during previews. Fine grain and measurement-like ticks continue the subtle all-purpose-flour reference without using bakery imagery. Generous spacing and a consistent card system prioritize the work over decoration. Project imagery remains limited to verified, project-owned assets.
+
+The root metadata publishes the official favicon family, Apple touch icon, web manifest, and 1200×630 share card. `metadataBase` fixes social and icon URLs to the canonical `https://allpurposeapps.com` domain while Vercel previews continue to render the same page content.
 
 ## Content model
 
