@@ -128,14 +128,10 @@ export default function Home() {
     <main>
       <header className="site-header">
         <a className="wordmark" href="#top" aria-label="All-Purpose Apps, home">
-          <span className="wordmark-symbol" aria-hidden="true">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/brand/all-purpose-apps-mark.png" alt="" />
-          </span>
-          <span className="wordmark-copy">
-            All-Purpose Apps
-            <small>Custom software for businesses and big ideas.</small>
-          </span>
+          <picture>
+            <source media="(max-width: 720px)" srcSet="/brand/symbol-primary.svg" />
+            <img className="wordmark-logo" src="/brand/horizontal-primary.svg" alt="" />
+          </picture>
         </a>
         <nav aria-label="Primary navigation">
           <a href="#work">Work</a>
@@ -174,7 +170,7 @@ export default function Home() {
           <div className="hero-brand">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/brand/all-purpose-apps-seal.svg"
+              src="/brand/badge-primary.svg"
               alt="All-Purpose Apps — build, launch, grow; ideas into apps"
             />
           </div>
@@ -374,13 +370,11 @@ export default function Home() {
       </section>
 
       <footer>
-        <a className="wordmark footer-mark" href="#top" aria-label="All-Purpose Apps, back to top">
-          <span className="wordmark-symbol" aria-hidden="true">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/brand/all-purpose-apps-mark.png" alt="" />
-          </span>
+        <a className="footer-mark" href="#top" aria-label="All-Purpose Apps, back to top">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/brand/horizontal-primary.svg" alt="" />
         </a>
-        <p>All-Purpose Apps<br />By Joshua Perez Leduc</p>
+        <p>By Joshua Perez Leduc</p>
         <p>Web · Mobile · Desktop · Products</p>
         <a href="#top">Back to top <ArrowDownRight aria-hidden="true" /></a>
       </footer>

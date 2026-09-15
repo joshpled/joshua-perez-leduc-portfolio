@@ -14,13 +14,14 @@
 - `app/globals.css` — theme, layout, responsive behavior
 - `app/layout.tsx` — document metadata and shell
 - `next.config.ts` — native Next.js configuration used by Vercel
-- `public/brand` — approved All-Purpose Apps mark and app icon
+- `public/brand` — approved logo system, web icons, social card, and locally hosted companion fonts
 - `public/projects` — verified project-owned visuals
 - `README.md` — setup and content-maintenance notes
 - `ARCHITECTURE.md` — system and design rationale
 
 ## Decisions log
 
+- 2026-09-15 — Replace the smooth geometric `A` with the owner-approved particle-dissolving brand system — official badge, horizontal, symbol, favicon, social, color, and typography assets now form one consistent identity across the website. Gotcha: the traced SVG lettering and particles are artwork, not editable text; do not retype, rearrange, recolor individual parts, or add effects.
 - 2026-09-12 — Move the commercial portfolio from GitHub Pages to Vercel Pro before adding contact delivery — native Next.js hosting supports a server-side form handler, deployment previews, and commercial use without maintaining a parallel adapter. Gotcha: preserve Squarespace MX and TXT records during the web DNS cutover so `info@allpurposeapps.com` continues working.
 - 2026-09-12 — Make GitHub Pages builds switchable between the repository path and `allpurposeapps.com` — a repository variable enables a coordinated Squarespace DNS cutover without merging a build that immediately breaks the current public URL. Gotcha: `PAGES_CUSTOM_DOMAIN` must equal `true` only after the GitHub custom-domain setting and DNS are ready; set it to `false` and redeploy when rolling back.
 - 2026-09-12 — Integrate the full All-Purpose Apps badge directly into the opening hero — pairing the badge with the primary message creates one cohesive composition and removes a duplicated company-summary card. Gotcha: the badge moves above the headline below the tablet breakpoint, while capability details remain in Services and About.
