@@ -73,7 +73,7 @@ export default function ContactForm({ siteKey, contactEmail }: { siteKey: string
       setMessage(result.message);
       if (response.ok) setSent(true);
     } catch {
-      setMessage("We couldn’t confirm sending. Your message is still here—please retry or email me directly.");
+      setMessage("We couldn’t confirm your submission. Your message is still here—please retry or email me directly.");
     } finally {
       inFlight.current = false;
       setBusy(false);

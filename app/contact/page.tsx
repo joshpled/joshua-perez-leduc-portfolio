@@ -32,10 +32,10 @@ export default function ContactPage() {
         </section>
         <section className="contact-form-panel" aria-labelledby="form-heading">
           <h2 id="form-heading">Tell me about your project</h2>
-          <p className="form-intro">Your message comes straight to my inbox.</p>
+          <p className="form-intro">Share a few details and I’ll get back to you.</p>
           {enabled ? <ContactForm siteKey={process.env.TURNSTILE_SITE_KEY!} contactEmail={CONTACT_EMAIL} /> :
             <p className="form-notice">The form is temporarily unavailable. <a href={`mailto:${CONTACT_EMAIL}`}>Email me directly</a> to start the conversation.</p>}
-          <p className="contact-privacy">I use your details to respond to your inquiry. Messages are sent through Resend and kept in my email inbox; Cloudflare Turnstile checks for spam. Please leave out passwords, payment details, and sensitive documents.</p>
+          <p className="contact-privacy">I use your details to respond to your inquiry. Messages are stored privately so I can review them; Cloudflare Turnstile checks for spam. Please leave out passwords, payment details, and sensitive documents.</p>
         </section>
       </div>
     </main>

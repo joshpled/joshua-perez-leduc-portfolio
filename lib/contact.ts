@@ -15,15 +15,15 @@ const schema = z.object({
 }).strict();
 
 export function contactConfigured(env: Environment) {
-  return Boolean(env.RESEND_API_KEY && env.TURNSTILE_SECRET_KEY && env.TURNSTILE_SITE_KEY &&
-    z.string().email().safeParse(env.CONTACT_FROM_EMAIL).success);
+  return Boolean(env.SUPABASE_SECRET_KEY?.startsWith("sb_secret_") && env.TURNSTILE_SECRET_KEY && env.TURNSTILE_SITE_KEY &&
+    /^https:\/\/[a-z0-9]+\.supabase\.co$/.test(env.SUPABASE_URL ?? ""));
 }
 
 function reply(status: number, message: string) {
   return Response.json({ message }, { status, headers: { "Cache-Control": "no-store" } });
 }
 
-// Dependency injection lets tests prove delivery decisions without sending real mail.
+// Dependency injection lets tests prove storage decisions without writing real inquiries.
 export async function handleContact(request: Request, env: Environment, send: typeof fetch = fetch) {
   const origins = new Set(["https://allpurposeapps.com", "https://www.allpurposeapps.com",
     ...(env.CONTACT_ALLOWED_ORIGINS ?? "").split(",").map(value => value.trim()).filter(Boolean)]);
@@ -73,29 +73,25 @@ export async function handleContact(request: Request, env: Environment, send: ty
       return reply(400, "Please complete the spam check again, then resend your message.");
     }
 
-    const email = {
-      from: `All-Purpose Apps website <${env.CONTACT_FROM_EMAIL}>`,
-      to: [CONTACT_EMAIL],
-      reply_to: data.email,
-      subject: `Website inquiry from ${data.name}`,
-      text: `Name: ${data.name}\nEmail: ${data.email}\nCompany: ${data.company || "Not provided"}\n\n${data.message}`,
-    };
-    // Same submission + unchanged email can be retried without duplicate mail for 24h.
-    // Hash the content so edited messages cannot collide with an earlier attempt.
-    const digest = createHash("sha256").update(JSON.stringify(email)).digest("hex");
-    const delivery = await send("https://api.resend.com/emails", {
+    // The same page submission and unchanged content always produce the same row ID.
+    // A database uniqueness constraint handles concurrent and uncertain retries atomically.
+    const content = { name: data.name, email: data.email, company: data.company, message: data.message };
+    const id = createHash("sha256").update(JSON.stringify([data.submissionId, content])).digest("hex");
+    const saved = await send(`${env.SUPABASE_URL}/rest/v1/contact_inquiries?on_conflict=id`, {
       method: "POST",
-      headers: { Authorization: `Bearer ${env.RESEND_API_KEY}`, "Content-Type": "application/json",
-        "Idempotency-Key": `contact/${data.submissionId}/${digest}` },
-      body: JSON.stringify(email),
+      headers: { apikey: env.SUPABASE_SECRET_KEY!, "Content-Type": "application/json",
+        Prefer: "resolution=ignore-duplicates,return=minimal" },
+      body: JSON.stringify({ id, ...content }),
       signal: AbortSignal.timeout(12000),
+      redirect: "error",
     });
-    if (!delivery.ok || typeof (await delivery.json()).id !== "string") {
-      return reply(502, "We couldn’t confirm sending. Your message is still here—please retry or email me directly.");
+    // PostgREST returns 201 and no record body for an insert/ignored duplicate.
+    if (saved.status !== 201) {
+      return reply(502, "We couldn’t confirm your submission. Your message is still here—please retry or email me directly.");
     }
-    return reply(200, "Your message is on its way. Thanks for getting in touch.");
+    return reply(200, "Your message has been received. Thanks for getting in touch.");
   } catch {
     // Provider errors may contain personal data or credentials: never log their payloads.
-    return reply(502, "We couldn’t confirm sending. Your message is still here—please retry or email me directly.");
+    return reply(502, "We couldn’t confirm your submission. Your message is still here—please retry or email me directly.");
   }
 }

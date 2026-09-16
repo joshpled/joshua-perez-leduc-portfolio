@@ -57,13 +57,15 @@ The website uses the September 15, 2026 professional brand kit supplied by the o
 
 Companion typography is hosted locally from the supplied kit: Barlow Condensed Bold for display headings and Inter for body and interface copy. The font license files live beside the font files in `public/brand/fonts`.
 
-## Contact details
+## Contact inquiries
 
-The `/contact` page sends inquiries to `info@allpurposeapps.com` through a server-side Resend request after Cloudflare Turnstile verification. The visitor’s address is Reply-To. A direct email link remains available if the form cannot send. No inquiry database or new dependency is required.
+The `/contact` page saves inquiries in Supabase for the owner to read in its dashboard, using the same storage-and-review workflow as the naming poll. The table is `public.contact_inquiries` in the existing `software-name-poll` project. There are no email notifications. A direct email link remains an optional fallback.
 
-Copy `.env.example` to `.env.local` for local setup. Required values: `RESEND_API_KEY`, `CONTACT_FROM_EMAIL`, `TURNSTILE_SITE_KEY`, and `TURNSTILE_SECRET_KEY`. `CONTACT_ALLOWED_ORIGINS` adds exact trusted local/preview origins. Secrets stay server-side; only the widget site key is public. See [contact setup](docs/contact-setup.md) for DNS, Vercel configuration, delivery verification, and troubleshooting.
+The Vercel endpoint checks Turnstile and validates fields before storing a private inquiry. The public cannot read, edit, delete, or directly insert rows. A database uniqueness constraint prevents duplicates when retrying the same page submission with unchanged content. The database supplies the submission timestamp.
 
-Run `npm test` for isolated delivery/abuse/failure tests (Node’s test runner with TypeScript stripping), `npx tsc --noEmit`, `npm run lint`, and `npm run build`. Tests mock providers and send no real mail. Live inbox and Reply-To verification must be completed separately before release.
+Copy `.env.example` to `.env.local` for local setup. Required values: `SUPABASE_URL`, `SUPABASE_SECRET_KEY`, `TURNSTILE_SITE_KEY`, and `TURNSTILE_SECRET_KEY`. `CONTACT_ALLOWED_ORIGINS` adds exact trusted local/preview origins. Only the widget site key reaches the browser. See [contact setup](docs/contact-setup.md) for the owner dashboard, database schema, Vercel configuration, verification, and troubleshooting.
+
+Run `npm test`, `npx tsc --noEmit`, `npm run lint`, and `npm run build`. Application tests mock providers and save no real inquiries. Run `tests/contact-database.sql` in Supabase to verify permissions with rollback-only data. A real browser submission and dashboard receipt check are required separately before release. No new dependency is required.
 
 ## Selected projects
 

@@ -1,32 +1,34 @@
-# ADR 010: Contact inquiries delivered to the owner by email
+# ADR 010: Store contact inquiries privately in Supabase
 
 - Date: 2026-09-15
-- Status: Accepted for implementation; live delivery verification pending
+- Status: Accepted; database created and permissions verified, hosting secrets and end-to-end preview test pending
 
 ## Context
 
-The owner wants website visitors to submit an inquiry that actually reaches their inbox. The portfolio already runs on native Next.js hosting in Vercel. A link that only opens a visitor's email app does not fulfill the form requirement.
+The owner wants visitors to submit inquiries and prefers the poll site's workflow: save responses in Supabase and read them in the owner dashboard. Automatic email notification is not required. The existing poll project can hold a separate table without creating another project.
 
 ## Decision
 
-Add `/contact`, a client form, and `POST /api/contact`. Validate a bounded JSON request, check a honeypot and a server-verified Cloudflare Turnstile token, then send plain text through Resend to the fixed owner address `info@allpurposeapps.com`. Use a verified `forms.allpurposeapps.com` sender; set the visitor as Reply-To. Public configuration is limited to the Turnstile site key.
+Add `/contact`, its client form, and `POST /api/contact`. Save name, email, optional company, message, and a database-generated timestamp in `public.contact_inquiries` in the existing `software-name-poll` project. The owner reads the table in Supabase's authenticated dashboard. No email API or email DNS setup is involved.
 
-The form shows success only after Resend returns a successful response with an email ID. This means accepted for delivery, not proof of inbox placement. Failed or uncertain attempts retain the form values and offer retry or direct email. A submission UUID plus hash of the email content supplies a Resend idempotency key: unchanged retries within 24 hours do not duplicate mail. Editing content creates a distinct delivery. The UUID lives only in the mounted page, so refreshing or reopening the page starts a new submission.
+Vercel checks a bounded JSON request, exact origin allowlist, field validation, honeypot, and server-verified Cloudflare Turnstile token before writing through Supabase's Data API. The server uses a private `sb_secret_` key; the browser receives only the public Turnstile site key. This is intentionally stricter than the informal poll's anonymous direct INSERT: public contact submissions should not bypass the spam check by calling the table API directly.
 
-No database, attachments, visitor auto-replies, or new packages. Use existing Zod for validation, built-in fetch for providers, and Node's test runner with mocked provider boundaries. This handles personal data, so recipient restriction, validation, failure states, and logging deserve extra review.
+Enable Row Level Security and revoke all public/anon/authenticated privileges on the new table. Give `service_role` only INSERT on the allowed fields and SELECT on the opaque ID needed by conflict handling. Dashboard administrators retain owner access. This does not alter poll-table permissions. The Supabase secret is project-wide even though this new table has restricted grants; protect it carefully because it can access other project resources according to their grants.
 
-## Why and alternatives
+A SHA-256 hash of the page submission UUID and normalized content is the primary key. PostgREST's `resolution=ignore-duplicates,return=minimal` inserts once and ignores an existing identical ID without updating any saved message. Concurrent/uncertain retries rely on the database constraint. Editing content creates a distinct ID. Reloading the page creates a new submission UUID; this is retry deduplication, not an abuse quota.
 
-- Native Vercel route: uses the existing hosting model; no parallel worker or form-host subscription.
-- Resend API instead of mailbox SMTP: avoids keeping the owner's mailbox password in the application and supports request idempotency.
-- Turnstile plus honeypot: basic automated abuse protection without adding another storage service. No per-instance in-memory rate limiter: it would not reliably limit a distributed deployment. Provider quotas still matter; add shared rate limiting if actual abuse warrants it.
-- Plain text instead of visitor-supplied HTML: avoids HTML injection and keeps messages readable in any mail client.
-- Mailbox/provider records instead of a database: fewer moving parts, but there is no site-side backup if delivery fails after provider acceptance. Monitor Resend delivery/bounce status and the owner's spam folder.
+Success requires the database API's 201 response. A failed/uncertain attempt leaves the message editable and offers retry plus direct email. Missing configuration displays the email fallback. No persistent browser draft, attachments, inquiry-reading API, custom dashboard, or new package is added.
 
-## Maintenance and gotchas
+## Tradeoffs
 
-Preserve Squarespace's existing mailbox MX/TXT records. Add only the precise records supplied by Resend for the sending subdomain. Production and preview need their own explicit environment configuration; previews are not wildcard-trusted. Missing config renders an email fallback and the endpoint refuses delivery.
+- Reusing the poll project avoids another hosted project but shares its availability and administrative access. New grants apply only to `contact_inquiries`.
+- Server-mediated writes require a private hosting secret but preserve mandatory spam verification. Direct anonymous INSERT was rejected because it permits bypassing Turnstile.
+- Reading messages in Supabase avoids email delivery configuration. The owner must check manually; there are no notifications.
+- Database constraints enforce privacy, limits, and retry uniqueness; API tests mock storage and a rollback-only SQL test verifies real database behavior.
+- No in-memory distributed rate limiter. Turnstile and the honeypot offer basic abuse protection; review usage if spam becomes a problem.
 
-Origin validation protects browser submissions but is not bot authentication; Turnstile is verified for every delivery request, including its action and hostname. Tokens are single-use and expire, so the client resets the check after an attempt. Provider failures are never logged with message content, token values, or credentials. Request and provider timeouts are bounded by the hosting function duration.
+## Maintenance
 
-Before merge, verify a real preview submission reaches the owner's inbox and Reply addresses the visitor. After production deployment, repeat that check on the public domain. A mock-provider test or green deployment does not prove this.
+Review Supabase Table Editor, choose `contact_inquiries`, and sort `created_at` newest first. Retain inquiries only as long as needed. Private inquiry bodies, tokens, and keys must never appear in logs or source control. Configure secrets for Production and only trusted previews. Apply the schema once; an existing table error is a signal to inspect its schema, not overwrite it.
+
+Before merge, verify a real preview submission appears exactly once in the owner dashboard and public reads fail. Repeat on production after an explicitly approved merge. Application tests and a successful build do not prove hosted connectivity.

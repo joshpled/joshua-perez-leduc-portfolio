@@ -1,38 +1,55 @@
-# Contact delivery setup and troubleshooting
+# Contact storage setup and troubleshooting
 
-## Required setup
+## Where inquiries go
 
-1. In Resend, add `forms.allpurposeapps.com` and verify ownership using the exact DNS records Resend supplies. Add these at Squarespace; preserve existing mail and website records. Sending does not require a new mailbox at that subdomain.
-2. Create a sending-only Resend API key restricted to that domain. Enter it directly into Vercel as `RESEND_API_KEY`; do not paste it into chat, source files, screenshots, or logs.
-3. Set `CONTACT_FROM_EMAIL=contact@forms.allpurposeapps.com` in Vercel. The recipient is fixed in `lib/contact.ts` as `info@allpurposeapps.com`; visitors cannot override it.
-4. In Cloudflare Turnstile, use the Managed widget **All-Purpose Apps contact form**, created September 15, 2026 for `allpurposeapps.com`. Add the exact trusted preview hostname before testing a Vercel preview. Store `TURNSTILE_SITE_KEY` and `TURNSTILE_SECRET_KEY` directly in Vercel. Only the public site key reaches the browser.
-5. Add the exact preview origin to `CONTACT_ALLOWED_ORIGINS` in the Preview environment, e.g. `https://your-project-preview.vercel.app`. Do not broadly allow all Vercel domains. Configure the same hostname in Turnstile. The production domains are already allowed by code.
-6. Apply these values to the intended Production/Preview environments and redeploy to pick up environment changes. Do not give untrusted fork previews production secrets.
+Open the [software-name-poll Supabase project](https://supabase.com/dashboard/project/vujrrskdxtskmkldvnkj/editor), choose **contact_inquiries**, and sort **created_at** newest first. Each row contains name, email, company, and message. The poll remains in its separate `name_poll_votes` table. There are no email notifications; check the dashboard manually.
 
-For local development, copy `.env.example` to ignored `.env.local` and set the actual local origin and widget hostname. Cloudflare's public testing keys can be used only with isolated mock-provider tests; never put them in production. There is no production test-mode switch or spam-check bypass in this application.
+## Database
+
+`supabase/contact-inquiries.sql` creates the private table and restricted grants. It was applied to the existing poll project on September 15, 2026. Do not rerun CREATE TABLE blindly; inspect existing schema before changing it. Keep subsequent schema changes versioned.
+
+Row Level Security is enabled. Anonymous and app-authenticated clients have no direct table access. Vercel uses a server-only Supabase secret key (`service_role`), whose access to this table is limited to inserting allowed fields and reading opaque IDs for conflict handling. It cannot read inquiry contents, edit/delete rows, or supply timestamps. Dashboard administrators can review/export/delete records normally. The secret key remains project-wide: it is not limited to this table in other project resources, so never expose it.
+
+Run `tests/contact-database.sql` as postgres in SQL Editor to check permissions, invalid-data rejection, timestamp protection, and retry deduplication. Test writes are rolled back. A semantically equivalent permission script was run successfully on September 15; no test inquiry was retained.
+
+## Hosting configuration
+
+Enter values directly into Vercel's **All-Purpose Apps → Environment Variables** or ignored local `.env.local`. Never paste keys into chat, source, screenshots, or logs.
+
+| Variable | Purpose |
+| --- | --- |
+| `SUPABASE_URL` | `https://vujrrskdxtskmkldvnkj.supabase.co` |
+| `SUPABASE_SECRET_KEY` | A Supabase `sb_secret_` key; server-only, never `NEXT_PUBLIC_` |
+| `TURNSTILE_SITE_KEY` | Public key for **All-Purpose Apps contact form** |
+| `TURNSTILE_SECRET_KEY` | Private key for that same widget |
+| `CONTACT_ALLOWED_ORIGINS` | Extra exact trusted local/preview origins, comma-separated |
+
+The Managed Turnstile widget already exists for `allpurposeapps.com`. Add the trusted PR preview's exact hostname to its allowed domains. The production website origins are already allowed in code. Do not trust all `vercel.app` domains. Scope private Preview values to the trusted feature branch; do not provide production secrets to untrusted fork previews. Deployment environment changes require a new deployment.
+
+For local development, copy `.env.example` to `.env.local`. The app refuses publishable keys and non-HTTPS hosted Supabase URLs. Local mock-provider QA can use dummy credentials and Cloudflare's public test widget; never deploy mock providers or test keys. There is no application test-mode bypass.
 
 ## Acceptance checks
 
-- Submit name, email, and a meaningful message from the trusted preview.
-- Verify the message arrives in `info@allpurposeapps.com` (including checking spam). Resend's accepted response alone is not this check.
-- Open Reply and verify the recipient is the visitor's email. Sending an actual reply is not required.
-- Confirm double clicking does not create two messages; an unchanged retry retains its delivery key for Resend's 24-hour window.
-- Test keyboard navigation, narrow phone layout, invalid email, a blocked spam script, expired verification, and a failed network request. Form text must remain available after failure.
-- After approved merge, repeat delivery and Reply checks on `https://allpurposeapps.com/contact`.
+1. Run `npm test`, `npx tsc --noEmit`, `npm run lint`, and `npm run build`.
+2. Run the rollback-only database permission tests.
+3. Submit a clearly labeled test inquiry from the trusted preview. Verify a single matching row in the owner dashboard with its database timestamp.
+4. Retry unchanged content without reloading: it must reuse its row ID. Editing content makes a new inquiry, and reloading starts a new submission UUID.
+5. Confirm direct public reads and writes fail. Verify failed requests retain text and display the direct email fallback.
+6. After approved merge, repeat a submission from the production contact page. Test rows should be reviewed as test data in the dashboard.
 
-## Troubleshooting
+## Troubleshooting and retention
 
-- **Email fallback instead of form:** one or more environment values are missing, or the sender is not a valid email address. Check the deployment environment and redeploy.
-- **Spam check fails:** verify widget hostname, site/secret pair, server action `contact`, and exact allowed origin. A retry needs a new token; the widget resets automatically.
-- **Could not confirm sending:** inspect Resend's delivery dashboard for domain verification, key permissions, quota, or API errors. Do not log or paste provider payloads containing private values. Retry unchanged content without refreshing to reuse the idempotency key.
-- **Success but no inbox message:** inspect Resend's delivery/bounce event and spam folder; the app reports provider acceptance, not final mailbox placement.
-- **Spam volume:** review Turnstile and Resend dashboards. There is no shared rate-limit store or automatic alert pipeline. Add those only if observed traffic calls for them.
+- **Email fallback instead of form:** missing configuration, invalid hosted project URL, or wrong key type. Check the deployment environment and redeploy.
+- **Spam check fails:** verify widget domain, matching site/secret pair, action `contact`, and exact allowed origin. Tokens expire and are single-use; retries reset the widget.
+- **Could not confirm submission:** check Supabase availability, table existence, grants, key validity, and Vercel environment. Never log the provider's payload or private values. Retry unchanged text without reloading to avoid duplicates.
+- **Confirmation but no visible inquiry:** confirm the deployment's project URL, table name, and dashboard filters. Sort newest first. A repeated submission may have been safely ignored because its row already exists.
+- **Spam volume:** review Turnstile and database usage. There is no global rate-limit store or notification pipeline.
 
-The site stores no inquiry database or browser draft. Text stays on the current page after failure but is lost on reload. Resend and the receiving mailbox retain message records according to their settings. Keep mailbox access secure and delete inquiries when no longer needed.
+Messages remain in Supabase until an administrator deletes them. The website has no automatic retention or backup job; use project backup/export facilities appropriate to your needs. The form retains text only in the current page, so refreshing loses an unsent draft.
 
 ## References
 
-- [Resend domain verification](https://resend.com/docs/dashboard/domains/introduction)
-- [Resend send API](https://resend.com/docs/api-reference/emails/send-email)
-- [Resend retry keys](https://resend.com/docs/dashboard/emails/idempotency-keys)
+- [Supabase keys](https://supabase.com/docs/guides/getting-started/api-keys)
+- [Row Level Security](https://supabase.com/docs/guides/database/postgres/row-level-security)
+- [PostgREST insert and duplicate handling](https://docs.postgrest.org/en/v12/references/api/tables_views.html#upsert)
 - [Turnstile server verification](https://developers.cloudflare.com/turnstile/get-started/server-side-validation/)
