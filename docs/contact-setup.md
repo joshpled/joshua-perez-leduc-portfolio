@@ -24,9 +24,13 @@ Enter values directly into Vercel's **All-Purpose Apps → Environment Variables
 | `TURNSTILE_SECRET_KEY` | Private key for that same widget |
 | `CONTACT_ALLOWED_ORIGINS` | Extra exact trusted local/preview origins, comma-separated |
 
-The Managed Turnstile widget already exists for `allpurposeapps.com`. Add the trusted PR preview's exact hostname to its allowed domains. The production website origins are already allowed in code. Do not trust all `vercel.app` domains. Scope private Preview values to the trusted feature branch; do not provide production secrets to untrusted fork previews. Deployment environment changes require a new deployment.
+The Managed Turnstile widget allows `allpurposeapps.com` and the exact trusted preview hostname `all-purpose-apps-git-feature-553c0e-joshuapleduc-2965s-projects.vercel.app`. The production website origins are already allowed in code. Do not trust all `vercel.app` domains. Scope private Preview values to the trusted feature branch; do not provide production secrets to untrusted fork previews. Deployment environment changes require a new deployment.
 
 For local development, copy `.env.example` to `.env.local`. The app refuses publishable keys and non-HTTPS hosted Supabase URLs. Local mock-provider QA can use dummy credentials and Cloudflare's public test widget; never deploy mock providers or test keys. There is no application test-mode bypass.
+
+## Deployment verification
+
+On September 17, 2026, both private keys were saved as Vercel Secret variables for Production and only the `feature/contact-form` Preview branch. Public URL, site key, and exact Preview origin are configured separately. Preview deployment `GR1M8jeEP1Dw6nrsrT6Tp5VtbqxB` at commit `7620580` accepted the labeled `QA-CONTACT-20260917` inquiry through the real form. The owner dashboard showed exactly one matching row with database timestamp `2026-09-17 09:09:02.864684+00`. This verifies actual Turnstile verification and Supabase storage. Production must be checked after merge.
 
 ## Acceptance checks
 

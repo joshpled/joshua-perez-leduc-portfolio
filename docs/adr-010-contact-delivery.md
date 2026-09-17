@@ -1,7 +1,7 @@
 # ADR 010: Store contact inquiries privately in Supabase
 
 - Date: 2026-09-15
-- Status: Accepted; database created and permissions verified, hosting secrets and end-to-end preview test pending
+- Status: Accepted; database permissions, private hosting configuration, and a real preview submission verified on 2026-09-17
 
 ## Context
 

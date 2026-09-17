@@ -30,6 +30,8 @@
 
 ## Decisions log
 
+- 2026-09-17 — Approve the contact form for production after real preview verification — the owner will review inquiries manually in Supabase, with no email notification. Both hosting keys are private; Preview secrets are restricted to `feature/contact-form`. A real form submission produced exactly one dashboard row. Gotchas: repeat the check after deployment to production, preserve the poll table, and keep provider keys out of source and logs.
+
 - 2026-09-15 — Store contact inquiries in the poll project's separate Supabase table for manual dashboard review — the owner prefers the poll workflow and does not need email notifications. See ADR 010 and `docs/contact-setup.md`. Gotchas: keep the secret key server-only, require Turnstile before storage, deny direct public table access, use atomic retry deduplication, preserve poll data, and verify an actual preview row before release. Implementation approval does not authorize merge.
 
 - 2026-09-15 — Present all seven projects in a swipeable gallery with named shortcuts — the owner chose sequential browsing to reduce page length while retaining full project evidence. See ADR 009. Gotchas: keep names/children aligned, derive selection from actual scrolling, observe active-panel height, preserve maturity labels, and verify offscreen panels are inert after hydration. This supersedes the proposed expandable-detail follow-up.
