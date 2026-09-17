@@ -3,6 +3,7 @@ import { z } from "zod";
 
 export const CONTACT_EMAIL = "info@allpurposeapps.com";
 type Environment = Record<string, string | undefined>;
+export type SavedInquiry = { id: string; name: string; email: string; company: string; message: string; receivedAt: string };
 const singleLine = z.string().trim().min(1).max(120).regex(/^[^\r\n\u0000-\u001f]+$/);
 const schema = z.object({
   name: singleLine,
@@ -24,7 +25,7 @@ function reply(status: number, message: string) {
 }
 
 // Dependency injection lets tests prove storage decisions without writing real inquiries.
-export async function handleContact(request: Request, env: Environment, send: typeof fetch = fetch) {
+export async function handleContact(request: Request, env: Environment, send: typeof fetch = fetch, onCreated: (inquiry: SavedInquiry) => void = () => {}) {
   const origins = new Set(["https://allpurposeapps.com", "https://www.allpurposeapps.com",
     ...(env.CONTACT_ALLOWED_ORIGINS ?? "").split(",").map(value => value.trim()).filter(Boolean)]);
   const origin = request.headers.get("origin");
@@ -57,6 +58,7 @@ export async function handleContact(request: Request, env: Environment, send: ty
   try { input = schema.safeParse(JSON.parse(raw)); } catch { return reply(400, "Please complete the form."); }
   if (!input.success) return reply(400, "Check your name, email, and message (10–5,000 characters), then try again.");
   const data = input.data;
+  const receivedAt = new Date().toISOString();
   if (data.website) return reply(400, "We couldn’t verify this submission. Please email me instead.");
   if (!contactConfigured(env)) return reply(503, "The form is temporarily unavailable. Please email me directly.");
 
@@ -77,17 +79,25 @@ export async function handleContact(request: Request, env: Environment, send: ty
     // A database uniqueness constraint handles concurrent and uncertain retries atomically.
     const content = { name: data.name, email: data.email, company: data.company, message: data.message };
     const id = createHash("sha256").update(JSON.stringify([data.submissionId, content])).digest("hex");
-    const saved = await send(`${env.SUPABASE_URL}/rest/v1/contact_inquiries?on_conflict=id`, {
+    const saved = await send(`${env.SUPABASE_URL}/rest/v1/contact_inquiries?on_conflict=id&select=id`, {
       method: "POST",
       headers: { apikey: env.SUPABASE_SECRET_KEY!, "Content-Type": "application/json",
-        Prefer: "resolution=ignore-duplicates,return=minimal" },
+        Prefer: "resolution=ignore-duplicates,return=representation" },
       body: JSON.stringify({ id, ...content }),
       signal: AbortSignal.timeout(12000),
       redirect: "error",
     });
-    // PostgREST returns 201 and no record body for an insert/ignored duplicate.
+    // Return only IDs under the existing column grant. A duplicate returns [].
     if (saved.status !== 201) {
       return reply(502, "We couldn’t confirm your submission. Your message is still here—please retry or email me directly.");
+    }
+    const rows: unknown = await saved.json();
+    if (!Array.isArray(rows) || rows.length > 1 || (rows.length === 1 && rows[0]?.id !== id)) {
+      throw new Error("Unexpected storage response");
+    }
+    if (rows.length === 1) {
+      try { onCreated({ id, ...content, receivedAt }); }
+      catch { console.error("contact_email_schedule_failed", { inquiryId: id }); }
     }
     return reply(200, "Your message has been received. Thanks for getting in touch.");
   } catch {
