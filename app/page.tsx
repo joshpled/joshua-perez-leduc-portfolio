@@ -135,7 +135,7 @@ export default function Home() {
           <a href="#work">Work</a>
           <a href="#services">Services</a>
           <a href="#about">About</a>
-          <a className="nav-cta" href="#contact">
+          <a className="nav-cta" href="/contact">
             Start a conversation <ArrowRight aria-hidden="true" />
           </a>
         </nav>
@@ -350,11 +350,11 @@ export default function Home() {
           <p>
             Tell me what you want to build or improve. Let&apos;s find the clearest way forward.
           </p>
-          <div className="contact-placeholder" aria-label="Contact details pending">
-            <span>Public contact details</span>
-            <strong>Ready to add</strong>
+          <a className="contact-invite" href="/contact">
+            <span>Tell me what you have in mind</span>
+            <strong>Start a conversation</strong>
             <ArrowRight aria-hidden="true" />
-          </div>
+          </a>
         </div>
       </section>
 

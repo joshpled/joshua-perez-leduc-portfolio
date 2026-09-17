@@ -6,11 +6,19 @@
 - Develop: `npm run dev`
 - Typecheck: `npx tsc --noEmit`
 - Lint: `npm run lint`
+- Tests: `npm test` (isolated contact storage, no real writes)
 - Build: `npm run build`
 
 ## Structure
 
-- `app/page.tsx` — single-route portfolio content
+- `app/page.tsx` — portfolio content
+- `app/contact/` — contact page and interactive inquiry form
+- `app/api/contact/route.ts` — server-only POST endpoint
+- `lib/contact.ts` — request validation, spam verification, private Supabase inquiry storage
+- `tests/contact.test.mjs` — provider-isolated storage and abuse tests
+- `supabase/contact-inquiries.sql` — private inquiry table and grants
+- `tests/contact-database.sql` — rollback-only database permission checks
+- `.env.example` — safe configuration template
 - `app/project-gallery.tsx` — client navigation wrapper for server-rendered project panels
 - `app/globals.css` — theme, layout, responsive behavior
 - `app/layout.tsx` — document metadata and shell
@@ -21,6 +29,10 @@
 - `ARCHITECTURE.md` — system and design rationale
 
 ## Decisions log
+
+- 2026-09-17 — Approve the contact form for production after real preview verification — the owner will review inquiries manually in Supabase, with no email notification. Both hosting keys are private; Preview secrets are restricted to `feature/contact-form`. A real form submission produced exactly one dashboard row. Gotchas: repeat the check after deployment to production, preserve the poll table, and keep provider keys out of source and logs.
+
+- 2026-09-15 — Store contact inquiries in the poll project's separate Supabase table for manual dashboard review — the owner prefers the poll workflow and does not need email notifications. See ADR 010 and `docs/contact-setup.md`. Gotchas: keep the secret key server-only, require Turnstile before storage, deny direct public table access, use atomic retry deduplication, preserve poll data, and verify an actual preview row before release. Implementation approval does not authorize merge.
 
 - 2026-09-15 — Present all seven projects in a swipeable gallery with named shortcuts — the owner chose sequential browsing to reduce page length while retaining full project evidence. See ADR 009. Gotchas: keep names/children aligned, derive selection from actual scrolling, observe active-panel height, preserve maturity labels, and verify offscreen panels are inert after hydration. This supersedes the proposed expandable-detail follow-up.
 - 2026-09-15 — Shorten repeated portfolio copy and decorative spacing while keeping all seven projects fully expanded — visitors can scan capabilities and maturity sooner, with mobile section links always visible. See `docs/adr-008-portfolio-readability.md`. Gotchas: keep status labels beneath titles, retain every proof point and stack, and review 320px layouts plus sticky-header anchor offsets; expandable details belong to the next PR after this stage merges.
