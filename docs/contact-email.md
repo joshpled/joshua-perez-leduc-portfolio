@@ -48,7 +48,11 @@ On 2026-09-17, all 45 isolated tests, typecheck, lint, and the production build 
 
 Existing private Supabase and Turnstile Preview variables now target `feature/email-inquiry-alerts`. Its exact preview hostname is configured in Turnstile and `CONTACT_ALLOWED_ORIGINS`. Production contact settings remain in place.
 
-Google app-password setup, real Preview SMTP submission, inbox receipt, and Reply-To verification remain required before release. The owner must create and enter the new credential directly; the prepared Vercel secret has not yet been saved.
+The owner saved `GOOGLE_APP_PASSWORD` as a Vercel Secret for Production and `feature/email-inquiry-alerts`. Preview deployment `VmeFZSGUjHbBpwiJBZpLaDoKEq1x` on application revision `4b1cdfe` was redeployed with that configuration.
+
+The labeled `QA-EMAIL-DELIVERY-20260917` inquiry was confirmed in Supabase at `2026-09-17 17:13:54.194621+00`, ID `9960c6dee40e4e8986deb9b3c577691b9d4c0ebcaa6ad857bfece6c710b68bd8`. The matching email arrived in the owner Gmail Inbox at 1:13 PM Eastern. Its subject, message, receipt time, inbox link, and reference were verified. Gmail's message details confirmed sender and recipient `info@allpurposeapps.com`, with Reply-To `QA Email Delivery <contact-test@example.com>`. No reply was sent.
+
+Preview storage and actual email delivery are verified. Owner merge approval and a post-merge production test remain pending.
 
 ## References
 

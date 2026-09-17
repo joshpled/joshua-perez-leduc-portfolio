@@ -1,7 +1,7 @@
 # ADR 011: Email inquiry alerts through the existing Google mailbox
 
 - Date: 2026-09-17
-- Status: Accepted for implementation; live email verification pending
+- Status: Accepted; preview inbox delivery and Reply-To verified; production release pending
 - Supersedes ADR 010's no-notification decision; private storage remains unchanged.
 
 ## Context
@@ -27,3 +27,5 @@ Keep visitor success tied to storage. Missing email configuration, rejected SMTP
 ## Validation
 
 Provider-isolated tests cover new inserts versus duplicates, failed persistence, failed scheduling, fixed recipients, plain-text MIME output, credential validation, accepted recipients, and safe logs on SMTP failures. A passing build does not prove Google login or inbox delivery. Require a real preview submission, its saved database row, the received owner email, and a correct Reply-To before merge.
+
+On 2026-09-17, the real preview submission was verified in Supabase and the owner Gmail Inbox, including the visitor Reply-To. See `contact-email.md` for the test reference and release boundary.
