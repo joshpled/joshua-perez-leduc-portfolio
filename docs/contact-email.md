@@ -44,7 +44,11 @@ The browser's confirmation always means the inquiry was stored, not that the ema
 
 ## Verification status
 
-Implementation and isolated tests are prepared. Google app-password setup, real Preview SMTP submission, inbox receipt, and Reply-To verification remain required before release.
+On 2026-09-17, all 45 isolated tests, typecheck, lint, and the production build passed. The remote email-alert preview saved the labeled `QA-EMAIL-STORAGE-20260917` inquiry and displayed confirmation. Supabase receipt was verified at `2026-09-17 09:56:05.946529+00`, ID `99ad30563589fedf3367c777f9bfc03921645f3cdb4eecced24506bf12e01f8e`. This proves storage with the new ID-only response; it does not prove email delivery.
+
+Existing private Supabase and Turnstile Preview variables now target `feature/email-inquiry-alerts`. Its exact preview hostname is configured in Turnstile and `CONTACT_ALLOWED_ORIGINS`. Production contact settings remain in place.
+
+Google app-password setup, real Preview SMTP submission, inbox receipt, and Reply-To verification remain required before release. The owner must create and enter the new credential directly; the prepared Vercel secret has not yet been saved.
 
 ## References
 
