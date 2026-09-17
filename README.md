@@ -59,13 +59,13 @@ Companion typography is hosted locally from the supplied kit: Barlow Condensed B
 
 ## Contact inquiries
 
-The `/contact` page saves inquiries in Supabase for the owner to read in its dashboard, using the same storage-and-review workflow as the naming poll. The table is `public.contact_inquiries` in the existing `software-name-poll` project. There are no email notifications. A direct email link remains an optional fallback.
+The `/contact` page saves inquiries in Supabase for the owner to read in its dashboard, using the same storage-and-review workflow as the naming poll. The table is `public.contact_inquiries` in the existing `software-name-poll` project. New inquiries also trigger a Google-mail alert to `info@allpurposeapps.com` once configured. A direct email link remains an optional fallback.
 
 The Vercel endpoint checks Turnstile and validates fields before storing a private inquiry. The public cannot read, edit, delete, or directly insert rows. A database uniqueness constraint prevents duplicates when retrying the same page submission with unchanged content. The database supplies the submission timestamp.
 
-Copy `.env.example` to `.env.local` for local setup. Required values: `SUPABASE_URL`, `SUPABASE_SECRET_KEY`, `TURNSTILE_SITE_KEY`, and `TURNSTILE_SECRET_KEY`. `CONTACT_ALLOWED_ORIGINS` adds exact trusted local/preview origins. Only the widget site key reaches the browser. See [contact setup](docs/contact-setup.md) for the owner dashboard, database schema, Vercel configuration, verification, and troubleshooting.
+Copy `.env.example` to `.env.local` for local setup. Required values: `SUPABASE_URL`, `SUPABASE_SECRET_KEY`, `TURNSTILE_SITE_KEY`, and `TURNSTILE_SECRET_KEY`. `CONTACT_ALLOWED_ORIGINS` adds exact trusted local/preview origins. Set `GOOGLE_APP_PASSWORD` to enable alerts through the existing `info@allpurposeapps.com` Google mailbox. Only the widget site key reaches the browser. See [contact setup](docs/contact-setup.md) for the owner dashboard, database schema, Vercel configuration, verification, and troubleshooting.
 
-Run `npm test`, `npx tsc --noEmit`, `npm run lint`, and `npm run build`. Application tests mock providers and save no real inquiries. Run `tests/contact-database.sql` in Supabase to verify permissions with rollback-only data. A real browser submission and dashboard receipt check are required separately before release. No new dependency is required.
+Run `npm test`, `npx tsc --noEmit`, `npm run lint`, and `npm run build`. Application tests mock providers and save no real inquiries. Run `tests/contact-database.sql` in Supabase to verify permissions with rollback-only data. A real browser submission and dashboard receipt check are required separately before release. Nodemailer sends through Google SMTP; tests use fake or in-memory transports and send no real email. See [Google email alerts](docs/contact-email.md) for setup and delivery limitations.
 
 ## Selected projects
 

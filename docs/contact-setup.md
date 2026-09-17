@@ -2,7 +2,7 @@
 
 ## Where inquiries go
 
-Open the [software-name-poll Supabase project](https://supabase.com/dashboard/project/vujrrskdxtskmkldvnkj/editor), choose **contact_inquiries**, and sort **created_at** newest first. Each row contains name, email, company, and message. The poll remains in its separate `name_poll_votes` table. There are no email notifications; check the dashboard manually.
+Open the [software-name-poll Supabase project](https://supabase.com/dashboard/project/vujrrskdxtskmkldvnkj/editor), choose **contact_inquiries**, and sort **created_at** newest first. Each row contains name, email, company, and message. The poll remains in its separate `name_poll_votes` table. Configured Google-mail alerts notify `info@allpurposeapps.com` of new inquiries. The dashboard is the complete inbox, including inquiries whose alerts fail. See [email setup and troubleshooting](contact-email.md).
 
 ## Database
 
@@ -22,6 +22,7 @@ Enter values directly into Vercel's **All-Purpose Apps → Environment Variables
 | `SUPABASE_SECRET_KEY` | A Supabase `sb_secret_` key; server-only, never `NEXT_PUBLIC_` |
 | `TURNSTILE_SITE_KEY` | Public key for **All-Purpose Apps contact form** |
 | `TURNSTILE_SECRET_KEY` | Private key for that same widget |
+| `GOOGLE_APP_PASSWORD` | Private Google app password for the owner mailbox; enables email alerts |
 | `CONTACT_ALLOWED_ORIGINS` | Extra exact trusted local/preview origins, comma-separated |
 
 The Managed Turnstile widget allows `allpurposeapps.com` and the exact trusted preview hostname `all-purpose-apps-git-feature-553c0e-joshuapleduc-2965s-projects.vercel.app`. The production website origins are already allowed in code. Do not trust all `vercel.app` domains. Scope private Preview values to the trusted feature branch; do not provide production secrets to untrusted fork previews. Deployment environment changes require a new deployment.
@@ -47,7 +48,7 @@ On September 17, 2026, both private keys were saved as Vercel Secret variables f
 - **Spam check fails:** verify widget domain, matching site/secret pair, action `contact`, and exact allowed origin. Tokens expire and are single-use; retries reset the widget.
 - **Could not confirm submission:** check Supabase availability, table existence, grants, key validity, and Vercel environment. Never log the provider's payload or private values. Retry unchanged text without reloading to avoid duplicates.
 - **Confirmation but no visible inquiry:** confirm the deployment's project URL, table name, and dashboard filters. Sort newest first. A repeated submission may have been safely ignored because its row already exists.
-- **Spam volume:** review Turnstile and database usage. There is no global rate-limit store or notification pipeline.
+- **Spam volume:** review Turnstile and database usage. There is no global rate-limit store or automatic email retry queue.
 
 Messages remain in Supabase until an administrator deletes them. The website has no automatic retention or backup job; use project backup/export facilities appropriate to your needs. The form retains text only in the current page, so refreshing loses an unsent draft.
 

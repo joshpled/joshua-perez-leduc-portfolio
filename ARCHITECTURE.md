@@ -49,4 +49,14 @@ A hash of the submission UUID and normalized fields provides the row ID. PostgRE
 
 The owner reviews inquiries in the existing poll project's Supabase dashboard. `supabase/contact-inquiries.sql` enables RLS and revokes direct public access. The server role has INSERT on allowed fields and SELECT on the opaque ID, with no inquiry-content read/update/delete access. Timestamps come from the database. Other poll tables are unchanged. The secret key still carries project-wide privileges on other resources according to their grants, so keep it private.
 
-`tests/contact.test.mjs` injects fake provider responses. `tests/contact-database.sql` checks database permissions and idempotency using a rollback-only transaction. ADR 010 records the design; `docs/contact-setup.md` explains manual review, retention, and real submission checks. No email service or notification job is part of this feature.
+`tests/contact.test.mjs` injects fake provider responses. `tests/contact-database.sql` checks database permissions and idempotency using a rollback-only transaction. ADR 010 records the design; `docs/contact-setup.md` explains manual review, retention, and real submission checks. Google-mail alerts are described below.
+
+## Google-mail alerts
+
+After a verified insert, PostgREST returns only `id` through `select=id` and `return=representation`, using the existing SELECT(id) grant. An ignored duplicate returns an empty array, so an unchanged retry does not schedule another email. No schema or broader table permissions are needed.
+
+The route schedules `lib/contact-email.ts` through Next.js `after()`. This keeps the function alive for SMTP work after the visitor receives storage confirmation. Nodemailer connects to `smtp.gmail.com:465` with TLS and the existing owner mailbox's private app password. The fixed sender and recipient are `info@allpurposeapps.com`; the visitor appears only in Reply-To and the plain-text body. No request field controls the destination or SMTP host.
+
+The message includes a server-received time in America/New_York, the inquiry text, and the private inbox link. The database timestamp remains authoritative. SMTP errors, passwords, and message bodies are never logged: events include only a safe outcome code and the opaque inquiry ID. SMTP acceptance is not proof of inbox delivery.
+
+This is best-effort background delivery, not a durable queue. A crash after insertion but before notification, a provider failure, or a function timeout can miss an alert. An unchanged retry does not resend it. The database remains the complete inbox; failures require manual review. A durable outbox/retry worker would be a separate reliability change. See ADR 011 and `docs/contact-email.md`.

@@ -12,7 +12,7 @@ function provider(verify = challenge, storageStatus = 201) {
   const calls = [];
   const send = async (url, options) => {
     calls.push({ url, ...options });
-    return url.includes('siteverify') ? Response.json(verify) : new Response(null, { status: storageStatus });
+    return url.includes('siteverify') ? Response.json(verify) : Response.json([{ id: JSON.parse(options.body).id }], { status: storageStatus });
   };
   return { calls, send };
 }
@@ -23,10 +23,10 @@ test('stores only validated inquiry fields after verification, with private cred
   assert.equal(result.status, 200);
   assert.equal(result.headers.get('cache-control'), 'no-store');
   assert.equal(p.calls.length, 2);
-  assert.equal(p.calls[1].url, 'https://testproject.supabase.co/rest/v1/contact_inquiries?on_conflict=id');
+  assert.equal(p.calls[1].url, 'https://testproject.supabase.co/rest/v1/contact_inquiries?on_conflict=id&select=id');
   assert.equal(p.calls[1].headers.apikey, env.SUPABASE_SECRET_KEY);
   assert.equal(p.calls[1].headers.Authorization, undefined);
-  assert.equal(p.calls[1].headers.Prefer, 'resolution=ignore-duplicates,return=minimal');
+  assert.equal(p.calls[1].headers.Prefer, 'resolution=ignore-duplicates,return=representation');
   assert.equal(p.calls[1].redirect, 'error');
   const inquiry = JSON.parse(p.calls[1].body);
   assert.deepEqual(Object.keys(inquiry).sort(), ['company', 'email', 'id', 'message', 'name']);
@@ -106,4 +106,53 @@ test('unchanged retries share a row ID with refreshed tokens; edits create a new
   const records = p.calls.filter(c => c.url.includes('supabase')).map(c => JSON.parse(c.body));
   assert.equal(records[0].id, records[1].id);
   assert.notEqual(records[0].id, records[2].id);
+});
+
+
+test('schedules an alert only after a new row is confirmed, excluding tokens and secrets', async () => {
+  const p = provider(); const notices = [];
+  assert.equal((await handleContact(request(), env, p.send, row => notices.push(row))).status, 200);
+  assert.equal(notices.length, 1);
+  assert.deepEqual(Object.keys(notices[0]).sort(), ['company', 'email', 'id', 'message', 'name', 'receivedAt']);
+  assert.equal(notices[0].email, valid.email);
+  assert.ok(Number.isFinite(Date.parse(notices[0].receivedAt)));
+});
+
+test('an unchanged concurrent retry stores once and schedules one alert', async () => {
+  const ids = new Set(); const notices = [];
+  const send = async (url, options) => {
+    if (url.includes('siteverify')) return Response.json(challenge);
+    const { id } = JSON.parse(options.body);
+    const existing = ids.has(id); ids.add(id);
+    return Response.json(existing ? [] : [{ id }], { status: 201 });
+  };
+  const responses = await Promise.all([1, 2].map(() => handleContact(request(), env, send, row => notices.push(row))));
+  assert.deepEqual(responses.map(r => r.status), [200, 200]);
+  assert.equal(ids.size, 1); assert.equal(notices.length, 1);
+});
+
+test('storage or verification failure never schedules an alert', async () => {
+  for (const p of [provider(challenge, 500), provider({ success: false })]) {
+    let notified = false;
+    await handleContact(request(), env, p.send, () => { notified = true; });
+    assert.equal(notified, false);
+  }
+});
+
+test('unrecognized storage response cannot schedule an alert', async () => {
+  for (const data of [{}, [{ id: 'wrong-id' }], [null]]) {
+    let notified = false;
+    const send = async url => Response.json(url.includes('siteverify') ? challenge : data, { status: url.includes('siteverify') ? 200 : 201 });
+    assert.equal((await handleContact(request(), env, send, () => { notified = true; })).status, 502);
+    assert.equal(notified, false);
+  }
+});
+
+test('scheduling failure does not undo a stored inquiry or expose the failure', async t => {
+  const events = []; t.mock.method(console, 'error', (...args) => events.push(args));
+  const p = provider();
+  const response = await handleContact(request(), env, p.send, () => { throw new Error('private SMTP details'); });
+  assert.equal(response.status, 200);
+  assert.equal(events[0][0], 'contact_email_schedule_failed');
+  assert.doesNotMatch(JSON.stringify(events), /private SMTP details/);
 });

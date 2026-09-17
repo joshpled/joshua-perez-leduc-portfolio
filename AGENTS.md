@@ -15,6 +15,9 @@
 - `app/contact/` — contact page and interactive inquiry form
 - `app/api/contact/route.ts` — server-only POST endpoint
 - `lib/contact.ts` — request validation, spam verification, private Supabase inquiry storage
+- `lib/contact-email.ts` — Google SMTP alert, fixed owner recipient, plain-text message
+- `tests/contact-email.test.mjs` — isolated mail formatting, authentication, and failure checks
+- `docs/contact-email.md` — app-password setup, rollout, and missed-alert troubleshooting
 - `tests/contact.test.mjs` — provider-isolated storage and abuse tests
 - `supabase/contact-inquiries.sql` — private inquiry table and grants
 - `tests/contact-database.sql` — rollback-only database permission checks
@@ -29,6 +32,8 @@
 - `ARCHITECTURE.md` — system and design rationale
 
 ## Decisions log
+
+- 2026-09-17 — Add best-effort Google SMTP alerts to the existing Supabase inbox — the owner wants email notifications and explicitly rejected Resend. Nodemailer uses the existing info@allpurposeapps.com mailbox with a private Google app password. Return only inserted IDs to avoid alerts for duplicate submissions; Next.js after() separates SMTP latency from visitor confirmation. Gotchas: missing credentials, Google rejection, and runtime failure can miss an alert; no automatic retry queue. SMTP acceptance is not inbox-delivery proof. Verify a real preview email and Reply-To before merge. See ADR 011.
 
 - 2026-09-17 — Approve the contact form for production after real preview verification — the owner will review inquiries manually in Supabase, with no email notification. Both hosting keys are private; Preview secrets are restricted to `feature/contact-form`. A real form submission produced exactly one dashboard row. Gotchas: repeat the check after deployment to production, preserve the poll table, and keep provider keys out of source and logs.
 
