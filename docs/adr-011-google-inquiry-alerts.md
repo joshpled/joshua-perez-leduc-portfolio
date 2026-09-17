@@ -1,7 +1,7 @@
 # ADR 011: Email inquiry alerts through the existing Google mailbox
 
 - Date: 2026-09-17
-- Status: Accepted; preview inbox delivery and Reply-To verified; production release pending
+- Status: Accepted; merged and deployed; preview delivery verified; production email check pending
 - Supersedes ADR 010's no-notification decision; private storage remains unchanged.
 
 ## Context

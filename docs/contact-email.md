@@ -52,7 +52,9 @@ The owner saved `GOOGLE_APP_PASSWORD` as a Vercel Secret for Production and `fea
 
 The labeled `QA-EMAIL-DELIVERY-20260917` inquiry was confirmed in Supabase at `2026-09-17 17:13:54.194621+00`, ID `9960c6dee40e4e8986deb9b3c577691b9d4c0ebcaa6ad857bfece6c710b68bd8`. The matching email arrived in the owner Gmail Inbox at 1:13 PM Eastern. Its subject, message, receipt time, inbox link, and reference were verified. Gmail's message details confirmed sender and recipient `info@allpurposeapps.com`, with Reply-To `QA Email Delivery <contact-test@example.com>`. No reply was sent.
 
-Preview storage and actual email delivery are verified. Owner merge approval and a post-merge production test remain pending.
+Preview storage and actual email delivery are verified. The owner confirmed that Supabase retains inquiries when an email fails, then approved the merge. PR #16 was squash-merged as `e6bb07d308d58ac02034af32806b0de7c33522a2`; its branch was deleted locally and remotely. Final checks passed all 45 tests, typecheck, and lint.
+
+Vercel production deployment `4y5ChuYhMo9ULParmSnVtw2wSimf` is Ready and assigned to `allpurposeapps.com`. The post-merge browser test encountered Turnstile client error `300010` before submission, including one manual retry. Cloudflare classifies the 300 family as a generic challenge failure associated with bot detection. A human handoff was requested for the already-filled labeled `QA-PRODUCTION-EMAIL-20260917` inquiry; production email receipt is not yet verified. Do not replace production keys with test keys or weaken the spam check to complete QA.
 
 ## References
 

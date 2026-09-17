@@ -33,6 +33,8 @@
 
 ## Decisions log
 
+- 2026-09-17 — Squash-merge Google email inquiry alerts in PR #16 after owner comprehension review and verified preview delivery — inquiries remain private in Supabase and new submissions notify info@allpurposeapps.com through Google SMTP. Production revision e6bb07d is deployed. The feature branch is deleted locally and remotely. Gotchas: email is best-effort with no retry queue; production browser verification encountered Turnstile error 300010 and is awaiting a human submission. See docs/contact-email.md for release evidence.
+
 - 2026-09-17 — Add best-effort Google SMTP alerts to the existing Supabase inbox — the owner wants email notifications and explicitly rejected Resend. Nodemailer uses the existing info@allpurposeapps.com mailbox with a private Google app password. Return only inserted IDs to avoid alerts for duplicate submissions; Next.js after() separates SMTP latency from visitor confirmation. Gotchas: missing credentials, Google rejection, and runtime failure can miss an alert; no automatic retry queue. SMTP acceptance is not inbox-delivery proof. Real preview storage, Gmail Inbox receipt, and visitor Reply-To were verified on 2026-09-17. Owner merge approval and a production delivery check are pending. See ADR 011.
 
 - 2026-09-17 — Approve the contact form for production after real preview verification — the owner will review inquiries manually in Supabase, with no email notification. Both hosting keys are private; Preview secrets are restricted to `feature/contact-form`. A real form submission produced exactly one dashboard row. Gotchas: repeat the check after deployment to production, preserve the poll table, and keep provider keys out of source and logs.
