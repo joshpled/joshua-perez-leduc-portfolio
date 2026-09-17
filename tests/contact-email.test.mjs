@@ -4,7 +4,9 @@ import nodemailer from 'nodemailer';
 import { googleMailOptions, inquiryEmail, sendInquiryAlert } from '../lib/contact-email.ts';
 
 const inquiry = { id: 'a'.repeat(64), name: 'Test Visitor', email: 'visitor@example.com', company: 'Example', message: '<script>not HTML</script>\nA project idea.', receivedAt: '2026-09-17T12:30:00Z' };
-const env = { GOOGLE_APP_PASSWORD: 'abcd efgh ijkl mnop' };
+// Synthetic fixture; never authenticates to Google or opens a network connection.
+const fixtureCredential = 'a'.repeat(16);
+const env = { GOOGLE_APP_PASSWORD: fixtureCredential.match(/.{4}/g).join(' ') };
 function captureLogs(t) {
   const logs = [];
   t.mock.method(console, 'info', (...values) => logs.push(values));
@@ -16,7 +18,7 @@ test('uses encrypted Google SMTP and a fixed owner account, normalizing app-pass
   const options = googleMailOptions(env);
   assert.equal(options.host, 'smtp.gmail.com');
   assert.equal(options.port, 465); assert.equal(options.secure, true);
-  assert.deepEqual(options.auth, { user: 'info@allpurposeapps.com', pass: 'abcdefghijklmnop' });
+  assert.deepEqual(options.auth, { user: 'info@allpurposeapps.com', pass: fixtureCredential });
   assert.equal(options.tls.minVersion, 'TLSv1.2');
   assert.equal(options.logger, false); assert.equal(options.debug, false);
   assert.equal(options.disableFileAccess, true); assert.equal(options.disableUrlAccess, true);
@@ -25,7 +27,7 @@ test('uses encrypted Google SMTP and a fixed owner account, normalizing app-pass
 
 test('missing or malformed app credentials do not create a transport and never log the credential', async t => {
   const logs = captureLogs(t);
-  for (const password of ['', 'private-normal-password', 'abcdefghijklmnopq']) {
+  for (const password of ['', 'invalid', fixtureCredential + 'a']) {
     assert.equal(googleMailOptions({ GOOGLE_APP_PASSWORD: password }), null);
     await sendInquiryAlert(inquiry, { GOOGLE_APP_PASSWORD: password }, () => { throw new Error('must not create a transport'); });
   }
